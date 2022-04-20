@@ -86,12 +86,16 @@ var actorChoice = function (id) {
         if (checkSavedActorsArr(chosenActor) == false) {
             // Adds the actor to the savedActorsArr so that it can be added to local storage in order to decrease future API calls
             savedActorsArr.push(chosenActor);
+            // Saves the savedActorsArr in local storage
+            saveHistory();
         }
     }
 
     // Creates a new array if savedActorsArr was null
     else {
         savedActorsArr = [chosenActor];
+        // Saves the savedActorsArr in local storage
+        saveHistory();
     }
 };
 
@@ -144,12 +148,16 @@ var movieChoice = function (id) {
         if (checkSavedMoviesArr(chosenMovie) == false) {
             // Adds the Movie to the savedMoviesArr so that it can be added to local storage in order to decrease future API calls
             savedMoviesArr.push(chosenMovie);
+            // Saves the savedMoviesArr in local storage
+            saveHistory();
         }
     }
 
     // Creates a new array if savedMoviesArr was null
     else {
         savedMoviesArr = [chosenMovie];
+        // Saves the savedMoviesArr in local storage
+        saveHistory();
     }
 };
 
