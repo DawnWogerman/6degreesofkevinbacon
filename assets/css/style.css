@@ -1,0 +1,24 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 30px;
+}
+
+.headerNav a {
+    font-size: 35px;
+    margin-right: 40px;
+}
+
+.actorImg{
+    display: flex;
+    justify-content: space-around;
+}
+.actorImg img 
+{ 
+    border-style: solid;
+    border-color: black;
+    border-radius: 50%;
+    width: 150px;
+    height:150px;
+}
