@@ -7,24 +7,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <link rel="stylesheet" href="./assets/css/style.css"/>
-    <!-- <link rel="stylesheet" href="./assets/css/debug.css"/> -->
+    <link rel="stylesheet" href="./assets/css/debug.css"/>
     <title>6 Degrees of Kevin Bacon</title>
 </head>
 <body>
-<header>
-    <h1>Kevin Bacon</h1>
+   
+        <nav class="headerNav">
+            <div class="container">
+               <div id="navMenu" class="navbar-menu"></div>
+                 <!--<div class="navbar-start">
+                     <a class="navbar-item">
+                         Test
+                     </a>
+                 </div> -->
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-dark is-size-2">IMDB</a>
+                    </div>
+                </div>
+            </div>
 
-    <div class="headerNav">
-      <a href="">One</a>
-      <a href="">Two</a>
-      <a href="">Three</a>
-      <a href="">Four</a>
-    </div>
+        </nav>  
+        <section class="hero is-link is-fullheight-with-navbar"  >
+            <div class="hero-body">
+                <h1 class="title">6 Degrees of Kevin Bacon</h1>
+            </div>
+        
+            <!-- <a href="">One</a>
+            <a href="">Two</a>
+            <a href="">Three</a>
+            <a href="">Four</a> -->
+   
+        </section>
+   
+   
 
-</header>   
-
-
-<div class="actorImg">
+    <!-- <div class="actorImg">
     <img src="" alt="StartingActor">
     <img src="" alt="actor2">
     <img src="" alt="actor3">
@@ -33,93 +52,80 @@
     <img src="" alt="actor6">
     <img src="" alt="KevinBacon">
 </div>
-<br>
+<br> -->
 
-<div class="box-wrapper">
+    <div class="box-wrapper columns m-2">
 
-    <section class="leftBox-wrapper">
+        <section class="column leftBox-wrapper is-one-quarter">
 
-        <div>
-            <label for="actor-search">Choose an actor:</label>
-            <input type="text" id="actorName" name="actorName">
-            <button id="searchActor">Search</button>
-            <option value="One">One</option>
-            <option value="Two">Two</option>
-            <option value="Three">Three</option>
-        </div>
-
-        </div>
-
-        <div class="leftSection">
-                <div class="actorNameSelect">
-                    <h3>Actor Name</h3>
-                </div>
-
-                <div class="actorImgSelect">
-                    <img src="" alt="">
-                </div>
-        </div>
-
-    </section>
-
-
-    <section class="middleBox">
-
-        <div class="middleSection">
-
-            <div class="posterImg">
-            <img src="" alt="MoviePoster">
-            </div> 
-
-            <div class="posterDescription">
-                <p>Short Synopsis</p>
+            <div>
+                <h2 class="is-size-3">Search for a movie:</h2>
+                <input class="input is-fullwidth my-1" type="text" id="movie-search">
+                <button class="button is-fullwidth my-1" id="searchMovie">Search</button>
             </div>
 
-        </div>
-
-    </section>
-
-
-
-    <section class="rightBox-wrapper">
-
-        <div>
-            <label for="actor-search">Choose an actor:</label>
-            <select type="text" id="actorName" name="actorName">
-            <option value="One">One</option>
-            <option value="Two">Two</option>
-            <option value="Three">Three</option>
-        </div>
-
-        <div class="rightSection">
-                <div class="actorNameSelect">
-                    <h3>Actor Name</h3>
+            <div class="leftSection">
+                <div class="fromActorImg actor-choice is-relative">
+                    <figure class="image">
+                        <label class="label is-size-4" id="fromActorLabel" for="fromActor">Russell Crowe</label>
+                        <img id="fromActor" src="https://imdb-api.com/images/original/MV5BMTQyMTExNTMxOF5BMl5BanBnXkFtZTcwNDg1NzkzNw@@._V1_Ratio0.7273_AL_.jpg" alt="Russell Crowe" name="fromActor">
+                    </figure>
                 </div>
+            </div>
 
-                <div class="actorImgSelect">
-                    <img src="" alt="">
+        </section>
+
+
+        <section class="column middleBox is-half">
+
+            <div class="middleSection">
+
+                <figure class="image">
+                    <img id="poster" src="" alt="" />
+                </figure>
+
+                <!-- <div class="posterDescription">
+                    <p>Short Synopsis</p>
+                </div> -->
+
+            </div>
+
+        </section>
+
+
+
+        <section class="column rightBox-wrapper is-one-quarter">
+
+            <div>
+                <h2 class="is-size-3">Search for a connecting actor:</h2>
+                <input class="input is-fullwidth my-1" type="text" id="actor-search">
+                <button class="button is-fullwidth my-1" id="searchActor">Search</button>
+            </div>
+
+            <div class="rightSection">
+                <div class="toActorImg actor-choice is-relative">
+                    <figure class="image">
+                        <label class="label is-size-4 is-invisible" id="toActorLabel" for="toActor"></label>
+                        <img id="toActor" src="" alt="" name="toActor">
+                    </figure>
                 </div>
-        </div>
+            </div>
 
-    </section>
+        </section>
 
-</div>
-
-<div class="modal is-active is-clipped is-warning">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-      <p class="image is-4by3">
-        <img src="./assets/images/Ryan-Reynolds.jpeg" alt="">
-      </p>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
-  </div>
+    
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content has-background-white p-5">
+            <!-- Any other Bulma elements you want -->
+            <button>Gladiator</button>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
 
-<button class="js-modal-trigger" data-target="modal-js-example">
-    open JS example Modal
-</button>
-
-
-<script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
+
+
 </html>
