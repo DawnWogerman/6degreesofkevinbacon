@@ -17,7 +17,7 @@ var currentMovieObj = {};
 var resultsArr = [];
 var savedActorsArr = [];
 var savedMoviesArr = [];
-var chosenActor = null;
+var chosenActor = {fullName: "Russell Crowe"};
 var chosenMovie = null;
 var fullCast = null;
 var movieID = null;
@@ -138,7 +138,7 @@ var searchMovie = function (movie) {
                         console.log(resultsArr);
                         modalEl.classList.add("is-active");
                         clearModal();
-                        createResultBtns();
+                        createResultBtns("movie");
                     });
             };
         });
@@ -170,6 +170,7 @@ var movieChoice = function (id) {
         // Saves the savedMoviesArr in local storage
         saveHistory();
     }
+    displayChoice();
 };
 
 // Gets the full cast of a movie and saves it in an array for comparison
@@ -213,6 +214,7 @@ var checkFullCastHandler = function (name) {
     // Checks if checkFullCast returned true
     if (checkFullCast(name)) {
         console.log("true");
+        correctChoiceHandler();
     }
 
     // Runs if checkFullCast returned false
@@ -220,6 +222,18 @@ var checkFullCastHandler = function (name) {
         console.log("false");
     };
 };
+
+var correctChoiceHandler = function () {
+    clearModal();
+    var correctEl = document.createElement("h3");
+    correctEl.classList.add("is-size-2", "has-text-centerd", "my-3");
+    correctEl.textContent = "You got that right!";
+    modalContentEl.appendChild(correctEl);
+    var userChoiceEl = document.createElement("p");
+    userChoiceEl.classList.add("has-text-centerd", "my-3");
+    userChoiceEl.textContent = chosenActor.fullName + " was in \"" + chosenMovie.title + "\"";
+    modalContentEl.appendChild(userChoiceEl);
+}
 
 // Checks if an object (the chosenActor object) is already saved in savedActorsArr
 var checkSavedActorsArr = function (obj) {
@@ -229,6 +243,24 @@ var checkSavedActorsArr = function (obj) {
         for (i = 0; i < savedActorsArr.length; i++) {
             // Checks if the ID's match
             if (savedActorsArr[i].id === obj.id) {
+                // Returns true, ending the function, if it finds a match
+                return true;
+            }
+        }
+    };
+
+    // If no match was found
+    return false;
+};
+
+// Checks if an object (the chosenMovie object) is already saved in savedMoviesArr
+var checkSavedMoviesArr = function (obj) {
+    // Checks that savedMoivesArr actually has anything in it
+    if (savedMoviesArr !== null) {
+        // Loops through each object in the savedMoviesArr array
+        for (i = 0; i < savedMoviesArr.length; i++) {
+            // Checks if the ID's match
+            if (savedMoviesArr[i].id === obj.id) {
                 // Returns true, ending the function, if it finds a match
                 return true;
             }
@@ -267,10 +299,10 @@ var clearModal = function () {
     };
 };
 
-var createResultBtns = function () {
+var createResultBtns = function (specialClass) {
     for (i = 0; i < resultsArr.length; i++) {
         var resultBtnEl = document.createElement("button");
-        resultBtnEl.classList.add("button", "is-fullwidth", "m-1");
+        resultBtnEl.classList.add("button", "is-fullwidth", "m-1", specialClass);
         resultBtnEl.textContent = resultsArr[i].title + " " + resultsArr[i].description;
         resultBtnEl.setAttribute("data-id", resultsArr[i].id);
         resultBtnEl.setAttribute("data-url", resultsArr[i].imgUrl);
@@ -285,14 +317,30 @@ var closeModal = function () {
 };
 
 var modalBtnHandler = function (event) {
-    if (event.target.classList.contains("button")) {
+    if (event.target.classList.contains("button") && event.target.classList.contains("movie")) {
+        event.target.classList.add("is-loading");
         movieID = event.target.dataset.id;
         posterUrl = event.target.dataset.url;
-        console.log(movieID);
-        console.log(posterUrl);
-        closeModal();
+        movieChoice(movieID);
+        getFullCast(movieID);
+    };
+
+    if (event.target.classList.contains("button") && event.target.classList.contains("check-full-cast")) {
+        checkFullCastHandler(chosenActor.fullName);
     }
 }
+
+var displayChoice = function () {
+    clearModal();
+    var choiceEl = document.createElement("h3");
+    choiceEl.classList.add("is-size-2", "has-text-centerd", "my-3");
+    choiceEl.textContent = "You have chosen " + chosenMovie.title + " " + chosenMovie.description;
+    modalContentEl.appendChild(choiceEl);
+    var continueBtn = document.createElement("button");
+    continueBtn.classList.add("button", "is-fullwidth", "check-full-cast");
+    continueBtn.textContent = "Check";
+    modalContentEl.appendChild(continueBtn);
+};
 // END FUNCTION DECLARATIONS
 
 
