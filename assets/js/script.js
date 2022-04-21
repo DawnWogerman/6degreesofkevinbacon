@@ -1,6 +1,9 @@
 // BEGIN QUERY SELECTORS
-var actorInputEl = document.querySelector("#actorName");
-var searchActorBtn = document.querySelector("#searchActor");
+var movieInputEl = document.querySelector("#movie-search");
+var searchMovieBtn = document.querySelector("#searchMovie");
+var modalEl = document.querySelector(".modal");
+var modalContentEl = document.querySelector(".modal-content");
+var modalCloseBtn = document.querySelector(".modal-close");
 // END QUERY SELECTORS
 
 
@@ -17,6 +20,10 @@ var savedMoviesArr = [];
 var chosenActor = null;
 var chosenMovie = null;
 var fullCast = null;
+var movieID = null;
+var posterUrl = null;
+var actorID = null;
+var actorImg = null;
 // END GLOABAL VARIABLES
 
 
@@ -129,6 +136,9 @@ var searchMovie = function (movie) {
                         // Cycles to the next API key in the array
                         apiKeyCycler();
                         console.log(resultsArr);
+                        modalEl.classList.add("is-active");
+                        clearModal();
+                        createResultBtns();
                     });
             };
         });
@@ -241,18 +251,56 @@ var loadHistory = function () {
     savedActorsArr = JSON.parse(localStorage.getItem("Actors"));
 };
 
-var searchActorBtnHandler = function () {
-    var name = actorInputEl.value;
+var searchMovieBtnHandler = function () {
+    var name = movieInputEl.value;
     console.log(name);
-    searchActor(name);
-    actorInputEl.value = "";
+    searchMovie(name);
+    movieInputEl.value = "";
+    searchMovieBtn.classList.add("is-loading");
 };
+
+var clearModal = function () {
+    var child = modalContentEl.lastElementChild;
+    while (child) {
+        child.remove();
+        child = modalContentEl.lastElementChild;
+    };
+};
+
+var createResultBtns = function () {
+    for (i = 0; i < resultsArr.length; i++) {
+        var resultBtnEl = document.createElement("button");
+        resultBtnEl.classList.add("button", "is-fullwidth", "m-1");
+        resultBtnEl.textContent = resultsArr[i].title + " " + resultsArr[i].description;
+        resultBtnEl.setAttribute("data-id", resultsArr[i].id);
+        resultBtnEl.setAttribute("data-url", resultsArr[i].imgUrl);
+        modalContentEl.appendChild(resultBtnEl);
+    };
+    searchMovieBtn.classList.remove("is-loading");
+};
+
+var closeModal = function () {
+    clearModal();
+    modalEl.classList.remove("is-active");
+};
+
+var modalBtnHandler = function (event) {
+    if (event.target.classList.contains("button")) {
+        movieID = event.target.dataset.id;
+        posterUrl = event.target.dataset.url;
+        console.log(movieID);
+        console.log(posterUrl);
+        closeModal();
+    }
+}
 // END FUNCTION DECLARATIONS
 
 
 
 // BEGIN EVENT LISTENERS
-searchActorBtn.addEventListener("click", searchActorBtnHandler);
+searchMovieBtn.addEventListener("click", searchMovieBtnHandler);
+modalCloseBtn.addEventListener("click", closeModal);
+modalContentEl.addEventListener("click", modalBtnHandler);
 // END EVENT LISTENERS
 
 
