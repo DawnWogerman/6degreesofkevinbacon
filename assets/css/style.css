@@ -37,3 +37,20 @@ position: relative;
     position: absolute;
 }
 
+.box-wrapper {
+    display: flex;
+}
+.leftBox-wrapper {
+width: 35%;
+border: 1px solid black;
+}
+
+.middleBox-wrapper {
+width: 35%;
+border: 1px solid black;
+}
+
+.rightBox-wrapper {
+    width: 35%;
+    border: 1px solid black;
+    }
