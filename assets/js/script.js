@@ -1,5 +1,6 @@
 // BEGIN QUERY SELECTORS
-
+var actorInputEl = document.querySelector("#actorName");
+var searchActorBtn = document.querySelector("#searchActor");
 // END QUERY SELECTORS
 
 
@@ -239,12 +240,19 @@ var loadHistory = function () {
     savedMoviesArr = JSON.parse(localStorage.getItem("Movies"));
     savedActorsArr = JSON.parse(localStorage.getItem("Actors"));
 };
+
+var searchActorBtnHandler = function () {
+    var name = actorInputEl.value;
+    console.log(name);
+    searchActor(name);
+    actorInputEl.value = "";
+};
 // END FUNCTION DECLARATIONS
 
 
 
 // BEGIN EVENT LISTENERS
-
+searchActorBtn.addEventListener("click", searchActorBtnHandler);
 // END EVENT LISTENERS
 
 
