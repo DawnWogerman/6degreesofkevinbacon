@@ -14,6 +14,7 @@ header {
     display: flex;
     justify-content: space-around;
 }
+
 .actorImg img 
 { 
     border-style: solid;
@@ -22,3 +23,17 @@ header {
     width: 150px;
     height:150px;
 }
+
+.leftSection {
+position: relative;
+}
+
+.actorNameSelect {
+    position: absolute;
+
+}
+
+.actorImgSelect {
+    position: absolute;
+}
+
