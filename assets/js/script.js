@@ -1,6 +1,7 @@
 // BEGIN QUERY SELECTORS
 var actorInputEl = document.querySelector("#actorName");
 var searchActorBtn = document.querySelector("#searchActor");
+var modelEl = document.querySelector("modal");
 // END QUERY SELECTORS
 
 
@@ -246,6 +247,7 @@ var searchActorBtnHandler = function () {
     console.log(name);
     searchActor(name);
     actorInputEl.value = "";
+    modelEl.classList.add("is-active");
 };
 // END FUNCTION DECLARATIONS
 

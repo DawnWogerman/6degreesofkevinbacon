@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <link rel="stylesheet" href="./assets/css/style.css"/>
+    <!-- <link rel="stylesheet" href="./assets/css/debug.css"/> -->
     <title>6 Degrees of Kevin Bacon</title>
 </head>
 <body>
 <header>
-    <h1>Road to Kevin Bacon</h1>
+    <h1>Kevin Bacon</h1>
 
     <div class="headerNav">
       <a href="">One</a>
@@ -43,6 +46,8 @@
             <option value="One">One</option>
             <option value="Two">Two</option>
             <option value="Three">Three</option>
+        </div>
+
         </div>
 
         <div class="leftSection">
@@ -99,6 +104,21 @@
     </section>
 
 </div>
+
+<div class="modal is-active is-clipped is-warning">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <p class="image is-4by3">
+        <img src="./assets/images/Ryan-Reynolds.jpeg" alt="">
+      </p>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+<button class="js-modal-trigger" data-target="modal-js-example">
+    open JS example Modal
+</button>
+
 
 <script src="./assets/js/script.js"></script>
 </body>
