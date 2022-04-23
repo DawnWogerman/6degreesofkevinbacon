@@ -263,13 +263,19 @@ var correctChoiceHandler = function (arg) {
     userChoiceEl.textContent = chosenActor.name + " was in \"" + chosenMovie.name + "\"";
     modalContentEl.appendChild(userChoiceEl);
     var continueBtn = document.createElement("button");
-    continueBtn.classList.add("button", "is-fullwidth", "find-connection");
-    if (arg == "movie") {
+    if (arg == "movie" && chosenActor.name !== "Kevin Bacon") {
+        continueBtn.classList.add("button", "is-fullwidth", "find-connection");
         continueBtn.textContent = "Find a Connecting Actor";
     }
 
-    else if (arg == "actor") {
+    else if (arg == "actor" && chosenActor.name !== "Kevin Bacon") {
+        continueBtn.classList.add("button", "is-fullwidth", "find-connection");
         continueBtn.textContent = "Find a Connecting Movie";
+    }
+
+    else {
+        continueBtn.classList.add("button", "is-fullwidth", "victory");
+        continueBtn.textContent = "Victory!"
     }
     modalContentEl.appendChild(continueBtn);
 };
@@ -409,6 +415,10 @@ var modalBtnHandler = function (event) {
         closeModal();
     }
 
+    if (event.target.classList.contains("button") && event.target.classList.contains("victory")) {
+        victoryHandler();
+    }
+
     if (event.target.classList.contains("button") && event.target.classList.contains("actor")) {
         event.target.classList.add("is-loading");
         actorID = event.target.dataset.id;
@@ -483,6 +493,22 @@ var resetDisplay = function () {
     toActorLabelEl.classList.add("is-invisible");
     toActorEl.setAttribute("src", "");
     toActorEl.setAttribute("alt", "");
+}
+
+var victoryHandler = function () {
+    clearModal();
+    var youWinEl = document.createElement("h3");
+    youWinEl.classList.add("is-size-2", "has-text-centerd", "my-3");
+    youWinEl.textContent = "Congratulations!";
+    modalContentEl.appendChild(youWinEl);
+    var victoryTextEl = document.createElement("p");
+    victoryTextEl.classList.add("has-text-centerd", "my-3");
+    victoryTextEl.textContent = "You've reached Kevin Bacon";
+    modalContentEl.appendChild(victoryTextEl);
+    var playAgainBtn = document.createElement("button");
+    playAgainBtn.classList.add("button", "is-fullwidth", "play-again")
+    playAgainBtn.textContent = "Play Again";
+    modalContentEl.appendChild(playAgainBtn);
 }
 // END FUNCTION DECLARATIONS
 
