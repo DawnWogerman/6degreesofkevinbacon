@@ -227,7 +227,6 @@ var checkFullCast = function (name) {
 var checkFullCastHandler = function (name) {
     // Checks if checkFullCast returned true
     if (checkFullCast(name)) {
-        console.log("true");
         if (movieSearchPressed == true) {
             correctChoiceHandler("movie");
             movieSearchPressed = false;
@@ -241,7 +240,15 @@ var checkFullCastHandler = function (name) {
 
     // Runs if checkFullCast returned false
     else {
-        console.log("false");
+        if (movieSearchPressed == true) {
+            incorrectChoiceHandler("movie");
+            movieSearchPressed = false;
+        }
+
+        else if (actorSearchPressed == true) {
+            incorrectChoiceHandler("actor");
+            actorSearchPressed = false;
+        }
     };
 };
 
@@ -265,7 +272,29 @@ var correctChoiceHandler = function (arg) {
         continueBtn.textContent = "Find a Connecting Movie";
     }
     modalContentEl.appendChild(continueBtn);
-}
+};
+
+var incorrectChoiceHandler = function (arg) {
+    clearModal();
+    var correctEl = document.createElement("h3");
+    correctEl.classList.add("is-size-2", "has-text-centerd", "my-3");
+    correctEl.textContent = "I'm sorry, no.";
+    modalContentEl.appendChild(correctEl);
+    var userChoiceEl = document.createElement("p");
+    userChoiceEl.classList.add("has-text-centerd", "my-3");
+    userChoiceEl.textContent = chosenActor.name + " was not in \"" + chosenMovie.name + "\"";
+    modalContentEl.appendChild(userChoiceEl);
+    var continueBtn = document.createElement("button");
+    continueBtn.classList.add("button", "is-fullwidth", "find-connection");
+    if (arg == "movie") {
+        continueBtn.textContent = "Find a Connecting Movie";
+    }
+
+    else if (arg == "actor") {
+        continueBtn.textContent = "Find a Connecting Actor";
+    }
+    modalContentEl.appendChild(continueBtn);
+};
 
 // Checks if an object (the chosenActor object) is already saved in savedActorsArr
 var checkSavedActorsArr = function (obj) {
@@ -452,7 +481,6 @@ var resetDisplay = function () {
     fromActorLabelEl.textContent = chosenActor.name;
     toActorLabelEl.textContent = "";
     toActorLabelEl.classList.add("is-invisible");
-    posterLabelEl.classList.add("is-invisible");
     toActorEl.setAttribute("src", "");
     toActorEl.setAttribute("alt", "");
 }
