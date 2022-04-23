@@ -5,6 +5,7 @@ var fromActorEl = document.querySelector("#fromActor");
 var fromActorLabelEl = document.querySelector("#fromActorLabel");
 var posterEl = document.querySelector("#poster");
 var actorInputEl = document.querySelector("#actor-search");
+var posterLabelEl = document.querySelector("#posterLabel");
 var searchActorBtn = document.querySelector("#searchActor");
 var toActorEl = document.querySelector("#toActor");
 var toActorLabelEl = document.querySelector("#toActorLabel");
@@ -346,6 +347,8 @@ var createResultBtns = function (specialClass) {
 var closeModal = function () {
     clearModal();
     modalEl.classList.remove("is-active");
+    movieSearchPressed = false;
+    actorSearchPressed = false;
 };
 
 var modalBtnHandler = function (event) {
@@ -364,10 +367,14 @@ var modalBtnHandler = function (event) {
     if (event.target.classList.contains("button") && event.target.classList.contains("find-connection")) {
         if (event.target.textContent == "Find a Connecting Actor") {
             actorInputEl.focus();
+            searchActorBtn.disabled = false;
+            searchMovieBtn.disabled = true;
         }
 
         else if (event.target.textContent == "Find a Connecting Movie") {
             movieInputEl.focus();
+            searchActorBtn.disabled = true;
+            searchMovieBtn.disabled = false;
             resetDisplay();
         }
         closeModal();
@@ -379,11 +386,31 @@ var modalBtnHandler = function (event) {
         actorImg = event.target.dataset.url;
         actorChoice(actorID);
     };
-}
+};
+
+var getMovieSynopsis = function () {
+    fetch("http://www.omdbapi.com/?apikey=ce77b7fe&i=" + chosenMovie.id + "&plot")
+         // Runs an anonymous function on the response
+         .then(function (response) {
+            // Checks if the response was okay
+            if (response.ok) {
+                // Converts it to a JSON object
+                response.json()
+                    // Runs an anonymous function to handle the fetched data
+                    .then(function (data) {
+                        console.log(data);
+                        posterLabelEl.textContent = data.Plot;
+                        posterLabelEl.classList.remove("is-invisible");
+                    })
+            }
+        })
+;}
 
 var displayChoiceMovie = function () {
     posterEl.setAttribute("src", chosenMovie.imgUrl);
     posterEl.setAttribute("alt", chosenMovie.name + " poster");
+    getMovieSynopsis();
+    // posterLabelEl.textContent
     clearModal();
     var choiceEl = document.createElement("h3");
     choiceEl.classList.add("is-size-2", "has-text-centerd", "my-3");
@@ -415,6 +442,7 @@ var searchActorBtnHandler = function () {
     var name = actorInputEl.value;
     console.log(name);
     searchActor(name);
+    actorInputEl.value = "";
     actorSearchPressed = true;
 }
 
@@ -424,6 +452,7 @@ var resetDisplay = function () {
     fromActorLabelEl.textContent = chosenActor.name;
     toActorLabelEl.textContent = "";
     toActorLabelEl.classList.add("is-invisible");
+    posterLabelEl.classList.add("is-invisible");
     toActorEl.setAttribute("src", "");
     toActorEl.setAttribute("alt", "");
 }
