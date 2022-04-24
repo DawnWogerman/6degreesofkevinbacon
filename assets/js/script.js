@@ -66,6 +66,29 @@ var stringSlice = function (str) {
     }
 };
 
+var okResponseProblemDisplay = function (data) {
+    displayModal();
+    var errorMessageEl = document.createElement("h3");
+    errorMessageEl.classList.add("is-size-2", "has-text-centerd", "my-3");
+    errorMessageEl.textContent = data.errorMessage;
+    modalContentEl.appendChild(errorMessageEl);
+};
+
+var searchProblemDisplay = function () {
+    var errorMessageEl = document.createElement("h3");
+    errorMessageEl.classList.add("is-size-2", "has-text-centerd", "my-3");
+    errorMessageEl.textContent = "There was a problem with your search. Please try again.";
+    modalContentEl.appendChild(errorMessageEl);
+};
+
+var catchDisplay = function () {
+    displayModal();
+    var errorMessageEl = document.createElement("h3");
+    errorMessageEl.classList.add("is-size-2", "has-text-centerd", "my-3");
+    errorMessageEl.textContent = "There was a problem connecting with IMDb";
+    modalContentEl.appendChild(errorMessageEl);
+};
+
 // Chooses a random actor from the saved array to start the game
 var randomStartingActor = function () {
     var possibleStartingActors = savedActorsArr.filter(function (actor) {
@@ -94,6 +117,7 @@ var searchActor = function (name) {
                         console.log(data);
                         if (data.errorMessage) {
                             console.log(data.errorMessage);
+                            okResponseProblemDisplay(data);
                         }
 
                         else {
@@ -119,19 +143,12 @@ var searchActor = function (name) {
 
             else {
                 displayModal();
-                var errorMessage = document.createElement("h3");
-                errorMessage.classList.add("is-size-2", "has-text-centerd", "my-3");
-                errorMessage.textContent = "There was a problem connecting with IMDb"
-                modalContentEl.appendChild(errorMessage);
+                searchProblemDisplay();
             }
         })
 
         .catch(function (error) {
-            displayModal();
-            var errorMessage = document.createElement("h3");
-            errorMessage.classList.add("is-size-2", "has-text-centerd", "my-3");
-            errorMessage.textContent = "There was a problem connecting with IMDb"
-            modalContentEl.appendChild(errorMessage);
+            catchDisplay();
         });
 };
 
@@ -181,6 +198,7 @@ var searchMovie = function (movie) {
                         console.log(data);
                         if (data.errorMessage) {
                             console.log(data.errorMessage);
+                            okResponseProblemDisplay(data);
                         }
 
                         else {
@@ -202,7 +220,16 @@ var searchMovie = function (movie) {
                         };
                         apiKeyCycler();
                     });
+            }
+
+            else {
+                displayModal();
+                searchProblemDisplay();
             };
+        })
+
+        .catch(function (error) {
+            catchDisplay();
         });
 };
 
@@ -256,12 +283,23 @@ var getFullCast = function (movieID) {
                         }
 
                         else {
-                            displayModal();
+                            okResponseProblemDisplay();
+                            resetPoster();
                         }
                         apiKeyCycler();
                     });
+            }
+
+            else {
+                displayModal();
+                searchProblemDisplay();
             };
+        })
+
+        .catch(function (error) {
+            catchDisplay();
         });
+    document.querySelector(".is-loading").classList.remove("is-loading");
 };
 
 // Checks if an actor is listed in the full cast
@@ -354,6 +392,7 @@ var incorrectChoiceHandler = function (arg) {
         continueBtn.textContent = "Find a Connecting Actor";
     }
     modalContentEl.appendChild(continueBtn);
+    resetPoster();
 };
 
 // Checks if an object (the chosenActor object) is already saved in savedActorsArr
@@ -528,14 +567,13 @@ var displayChoiceMovie = function () {
     posterEl.setAttribute("src", chosenMovie.imgUrl);
     posterEl.setAttribute("alt", chosenMovie.name + " poster");
     getMovieSynopsis();
-    // posterLabelEl.textContent
     clearModal();
     var choiceEl = document.createElement("h3");
     choiceEl.classList.add("is-size-2", "has-text-centerd", "my-3");
     choiceEl.textContent = "You have chosen " + chosenMovie.name + " " + chosenMovie.description;
     modalContentEl.appendChild(choiceEl);
     var continueBtn = document.createElement("button");
-    continueBtn.classList.add("button", "is-fullwidth", "check-full-cast");
+    continueBtn.classList.add("button", "is-fullwidth", "check-full-cast", "is-loading");
     continueBtn.textContent = "Check";
     modalContentEl.appendChild(continueBtn);
 };
@@ -574,7 +612,14 @@ var resetDisplay = function () {
     toActorLabelEl.classList.add("is-invisible");
     toActorEl.setAttribute("src", "");
     toActorEl.setAttribute("alt", "");
-}
+};
+
+var resetPoster = function () {
+    posterLabelEl.textContent = "";
+    posterLabelEl.classList.add("is-invisible");
+    posterEl.setAttribute("src", "");
+    posterEl.setAttribute("alt", "");
+};
 
 var victoryHandler = function () {
     clearModal();
@@ -596,6 +641,7 @@ var newGame = function () {
     loadHistory();
     randomStartingActor();
     resetDisplay();
+    resetPoster();
 }
 // END FUNCTION DECLARATIONS
 
