@@ -1,4 +1,47 @@
+:root {
+    --primary-color: #707070;  
+}
+.center, .center-column, .top, .right, .bottom, .left {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.center-column {
+    flex-direction: column;
+}
+
+.top    { align-items:     flex-start; }
+.right  { justify-content: flex-end;   }
+.bottom { align-items:     flex-end;   }
+.left   { justify-content: flex-start; }
+
+.single-spaced, .single-spaced * {
+    line-height: 1;
+}
+
+@media (max-width: 1024px) {
+	.desktop {
+		display: none;
+	}
+}
+
+.hero {
+   background-image: url("../images/kevinbacon-herobg.jpg");
+   background-size: cover;
+   background-position: center;
+   opacity: 75%;
+}
+
+.textblk {
+    color:black;
+}
+
 header {
+   z-index: 9999;
+   font-family: 'Koulen', cursive;
+}
+/*header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,7 +51,7 @@ header {
 .headerNav a {
     font-size: 35px;
     margin-right: 40px;
-}
+} */
 
 .actorImg{
     display: flex;
@@ -51,4 +94,5 @@ position: relative;
 .label-poster {
     top: 50%;
 }
+
 
