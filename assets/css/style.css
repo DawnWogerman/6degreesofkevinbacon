@@ -47,3 +47,8 @@ position: relative;
     color: white !important;
     padding: 10px;
 }
+
+.label-poster {
+    top: 50%;
+}
+
