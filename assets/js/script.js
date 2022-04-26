@@ -299,13 +299,14 @@ var getFullCast = function (movieID) {
                             console.log(data.actors);
                             // Sets the returned cast data to the fullCast variable
                             fullCast = data.actors;
-                            // Cycles to the next API key in the array
+                            document.querySelector(".is-loading").classList.remove("is-loading");
                         }
-
+                        
                         else {
                             okResponseProblemDisplay();
                             resetPoster();
                         }
+                        // Cycles to the next API key in the array
                         apiKeyCycler();
                     });
             }
@@ -318,7 +319,6 @@ var getFullCast = function (movieID) {
         .catch(function (error) {
             catchDisplay();
         });
-    document.querySelector(".is-loading").classList.remove("is-loading");
 };
 
 // Checks if an actor is listed in the full cast
@@ -614,101 +614,12 @@ var displayChoiceActor = function () {
     modalContentEl.appendChild(continueBtn);
 };
 
-var searchMovieBtnHandler = function () {
-    var name = movieInputEl.value;
-    console.log(name);
-    searchMovie(name);
-    movieInputEl.value = "";
-    searchMovieBtn.classList.add("is-loading");
-    movieSearchPressed = true;
-};
-
 var clearModal = function () {
     var child = modalContentEl.lastElementChild;
     while (child) {
         child.remove();
         child = modalContentEl.lastElementChild;
     };
-};
-
-var createResultBtns = function (specialClass) {
-    for (i = 0; i < resultsArr.length; i++) {
-        var resultBtnEl = document.createElement("button");
-        resultBtnEl.classList.add("button", "is-fullwidth", "m-1", specialClass);
-        resultBtnEl.textContent = resultsArr[i].name + " " + resultsArr[i].description;
-        resultBtnEl.setAttribute("data-id", resultsArr[i].id);
-        resultBtnEl.setAttribute("data-url", resultsArr[i].imgUrl);
-        modalContentEl.appendChild(resultBtnEl);
-    };
-    searchMovieBtn.classList.remove("is-loading");
-};
-
-var closeModal = function () {
-    clearModal();
-    modalEl.classList.remove("is-active");
-};
-
-var modalBtnHandler = function (event) {
-    if (event.target.classList.contains("button") && event.target.classList.contains("movie")) {
-        event.target.classList.add("is-loading");
-        movieID = event.target.dataset.id;
-        posterUrl = event.target.dataset.url;
-        movieChoice(movieID);
-        getFullCast(movieID);
-    };
-
-    if (event.target.classList.contains("button") && event.target.classList.contains("check-full-cast")) {
-        checkFullCastHandler(chosenActor.name);
-    }
-
-    if (event.target.classList.contains("button") && event.target.classList.contains("find-connection")) {
-        if (event.target.textContent == "Find a Connecting Actor") {
-            actorInputEl.focus();
-        }
-
-        else if (event.target.textContent == "Find a Connecting Movie") {
-            movieInputEl.focus();
-            resetDisplay();
-        }
-        closeModal();
-    }
-
-    if (event.target.classList.contains("button") && event.target.classList.contains("actor")) {
-        event.target.classList.add("is-loading");
-        actorID = event.target.dataset.id;
-        actorImg = event.target.dataset.url;
-        actorChoice(actorID);
-    };
-}
-
-var displayChoiceMovie = function () {
-    posterEl.setAttribute("src", chosenMovie.imgUrl);
-    posterEl.setAttribute("alt", chosenMovie.name + " poster");
-    clearModal();
-    var choiceEl = document.createElement("h3");
-    choiceEl.classList.add("is-size-2", "has-text-centerd", "my-3");
-    choiceEl.textContent = "You have chosen " + chosenMovie.name + " " + chosenMovie.description;
-    modalContentEl.appendChild(choiceEl);
-    var continueBtn = document.createElement("button");
-    continueBtn.classList.add("button", "is-fullwidth", "check-full-cast");
-    continueBtn.textContent = "Check";
-    modalContentEl.appendChild(continueBtn);
-};
-
-var displayChoiceActor = function () {
-    toActorEl.setAttribute("src", chosenActor.imgUrl);
-    toActorEl.setAttribute("alt", chosenActor.name + " portrait");
-    toActorLabelEl.classList.remove("is-invisible");
-    toActorLabelEl.textContent = chosenActor.name;
-    clearModal();
-    var choiceEl = document.createElement("h3");
-    choiceEl.classList.add("is-size-2", "has-text-centerd", "my-3");
-    choiceEl.textContent = "You have chosen " + chosenActor.name + " " + chosenActor.description;
-    modalContentEl.appendChild(choiceEl);
-    var continueBtn = document.createElement("button");
-    continueBtn.classList.add("button", "is-fullwidth", "check-full-cast");
-    continueBtn.textContent = "Check";
-    modalContentEl.appendChild(continueBtn);
 };
 
 var searchActorBtnHandler = function () {
@@ -734,8 +645,8 @@ var displayMovieSearched = function(savedMoviesArr) {
         var movieSelected = document.createElement("li")
         console.log(savedMoviesArr[0])
         movieSelected.textContent = savedMoviesArr[i]
+        movieHistorylist.appendChild(movieSelected)
     }
-    movieHistorylist.appendChild(movieSelected)
     movieHistoryEl.appendChild(movieHistorylist)
     movieHistorydiv.appendChild(movieHistoryEl)
 
@@ -754,10 +665,10 @@ var displayActorSearched = function() {
     }
 }
 
-// after the search movie button click
-document.getElementById("searchMovie").addEventListener("click", displayMovieSearched())
-//after the search actor button click
-document.getElementById("searchActor").addEventListener("click", displayActorSearched())
+// // after the search movie button click
+// document.getElementById("searchMovie").addEventListener("click", displayMovieSearched)
+// //after the search actor button click
+// document.getElementById("searchActor").addEventListener("click", displayActorSearched)
 
 
 
