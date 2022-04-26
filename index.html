@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +15,7 @@
     <!-- <link rel="stylesheet" href="./assets/css/debug.css"/> -->
     <title>6 Degrees of Kevin Bacon</title>
 </head>
+
 <body>
     <section class="hero is-halfheight">
         <nav class="hero-head">
@@ -46,24 +49,23 @@
                 
             </div>
             
-
         </header>
     </section>
        <div class="box-wrapper columns m-2">
-
         <section class="column leftBox-wrapper is-one-quarter">
 
             <div>
                 <h2 class="is-size-3">Search for a movie:</h2>
-                <input class="input is-fullwidth my-1" type="text" id="movie-search">
+
+                <input class="input is-fullwidth my-1" type="text" id="movie-search" placeholder="Movie Search">
                 <button class="button is-fullwidth my-1" id="searchMovie">Search</button>
             </div>
 
             <div class="leftSection">
                 <div class="fromActorImg actor-choice is-relative">
-                    <figure class="image>
-                        <label class="label is-size-4" id="fromActorLabel" for="fromActor">Russell Crowe</label>
-                        <img class="is-rounded" id="fromActor" src="https://imdb-api.com/images/original/MV5BMTQyMTExNTMxOF5BMl5BanBnXkFtZTcwNDg1NzkzNw@@._V1_Ratio0.7273_AL_.jpg" alt="Russell Crowe" name="fromActor">
+                    <figure class="image">
+                        <label class="label is-size-4" id="fromActorLabel" for="fromActor"></label>
+                        <img id="fromActor" src="" alt="" name="fromActor">
                     </figure>
                 </div>
             </div>
@@ -76,15 +78,25 @@
             <div class="middleSection">
 
                 <figure class="image">
-                    <img id="poster" src="" alt="" />
+                    <label class="label label-poster is-size-4 is-invisible" id="posterLabel" for="poster"></label>
+                    <img id="poster" src="" alt="" name="poster" />
                 </figure>
 
-                <!-- <div class="posterDescription">
-                    <p>Short Synopsis</p>
-                </div> -->
+          <div>
+            <p>Search History</p>
+            
+              <div class="searchHistory">
 
+                <div id="movieHistory">
+                  <p>Movie</p>
+                </div>
+                
+                  <div id="actorHistory">
+                    <p>Actor</p>
+                  </div>
+
+              </div>
             </div>
-
         </section>
 
 
@@ -93,8 +105,8 @@
 
             <div>
                 <h2 class="is-size-3">Search for a connecting actor:</h2>
-                <input class="input is-fullwidth my-1" type="text" id="actor-search">
-                <button class="button is-fullwidth my-1" id="searchActor">Search</button>
+                <input class="input is-fullwidth my-1" type="text" id="actor-search" placeholder="Actor Search">
+                <button class="button is-fullwidth my-1" id="searchActor" disabled>Search</button>
             </div>
 
             <div class="rightSection">
@@ -107,9 +119,8 @@
             </div>
 
         </section>
-
     </div>
-
+    
     <div class="modal">
         <div class="modal-background"></div>
         <div class="modal-content has-background-white p-5">
@@ -122,5 +133,5 @@
     <script src="./assets/js/script.js"></script>
 </body>
 
-
 </html>
+
