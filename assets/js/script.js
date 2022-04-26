@@ -25,6 +25,7 @@ var apiKey = apiKeysArr[apiKeyTracker];
 var currentActorObj = {};
 var currentMovieObj = {};
 var resultsArr = [];
+// Starting array of actors. This array will be built up any time the user uses a new actor not already represented in the array
 var savedActorsArr = [{ imgUrl: "https://imdb-api.com/images/original/MV5BMTQyMTExNTMxOF5BMl5BanBnXkFtZTcwNDg1NzkzNw@@._V1_Ratio0.7273_AL_.jpg", name: "Russell Crowe", id: "nm0000128", description: "(Actor, Les Misérables (2012))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMjQ2NTM4MzI4M15BMl5BanBnXkFtZTcwOTkxMjcxNA@@._V1_Ratio0.7273_AL_.jpg", name: "Djimon Hounsou", id: "nm0005023", description: "(Actor, Blood Diamond (2006))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTU5NjEwOTgwMF5BMl5BanBnXkFtZTgwOTEzMDk1NTM@._V1_Ratio0.7273_AL_.jpg", name: "Zachary Levi", id: "nm1157048", description: "(Actor, Shazam! (2019))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BNzEzMTI2NjEyNF5BMl5BanBnXkFtZTcwNTA0OTE4OA@@._V1_Ratio0.7273_AL_.jpg", name: "Idris Elba", id: "nm0252961", description: "(Actor, Beasts of No Nation (2015))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTk0NjM2MTE5M15BMl5BanBnXkFtZTcwODIxMzcyNw@@._V1_Ratio0.7273_AL_.jpg", name: "Michael Fassbender", id: "nm1055413", description: "(I) (Actor, Shame (2011))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BOTQxMTEyMjI0NV5BMl5BanBnXkFtZTgwODE4ODAzMjE@._V1_Ratio0.7273_AL_.jpg", name: "Kevin Bacon", id: "nm0000102", description: "(I) (Actor, Footloose (1984))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BOTU3NDE5MDQ4MV5BMl5BanBnXkFtZTgwMzE5ODQ3MDI@._V1_Ratio0.7273_AL_.jpg", name: "Jennifer Lawrence", id: "nm2225369", description: "(III) (Actress, The Hunger Games (2012))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTY1ODkwMTQxOF5BMl5BanBnXkFtZTcwNzkwNDcyMw@@._V1_Ratio0.7273_AL_.jpg", name: "Kevin Costner", id: "nm0000126", description: "(Actor, The Postman (1997))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTk1MjM3NTU5M15BMl5BanBnXkFtZTcwMTMyMjAyMg@@._V1_Ratio0.7727_AL_.jpg", name: "Tom Cruise", id: "nm0000129", description: "(Actor, Top Gun (1986))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTg2NTk2MTgxMV5BMl5BanBnXkFtZTgwNjcxMjAzMTI@._V1_Ratio0.7273_AL_.jpg", name: "Amy Adams", id: "nm0010736", description: "(III) (Actress, Arrival (2016))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTRhNzQ3NGMtZmQ1Mi00ZTViLTk3OTgtOTk0YzE2YTgwMmFjXkEyXkFqcGdeQXVyNzg5MzIyOA@@._V1_Ratio0.7727_AL_.jpg", name: "Anne Hathaway", id: "nm0004266", description: "(Actress, Les Misérables (2012))" }];
 var savedMoviesArr = [];
 var chosenActor = {};
@@ -57,19 +58,27 @@ var apiKeyCycler = function () {
     console.log(apiKey);
 };
 
+// Function for shortening long strings (for when the title and or description is excessively long)
 var stringSlice = function (str) {
+    // Checks the string length
     if (str.length > 60) {
+        // Slices off the end of the string beyond the 60th space in the string
         var shortenedStr = str.slice(0, 59) + "...";
+        // Returns the newly shortened string
         return shortenedStr;
     }
 
+    // If the string is already short enough, it is returned unchanged
     else {
         return str;
     }
 };
 
+// Function for when fetch responses come back ok, but have error messages
 var okResponseProblemDisplay = function (data) {
+    // Displays the modal with its content emptied
     displayModal();
+    // Dynamically creates content for the modal and appends it
     var errorMessageEl = document.createElement("h3");
     errorMessageEl.classList.add("is-size-2", "has-text-centerd", "my-3");
     errorMessageEl.textContent = data.errorMessage;
@@ -77,6 +86,9 @@ var okResponseProblemDisplay = function (data) {
 };
 
 var searchProblemDisplay = function () {
+    // Displays the modal with its content emptied
+    displayModal();
+    // Dynamically creates content for the modal and appends it
     var errorMessageEl = document.createElement("h3");
     errorMessageEl.classList.add("is-size-2", "has-text-centerd", "my-3");
     errorMessageEl.textContent = "There was a problem with your search. Please try again.";
@@ -84,7 +96,9 @@ var searchProblemDisplay = function () {
 };
 
 var catchDisplay = function () {
+    // Displays the modal with its content emptied
     displayModal();
+    // Dynamically creates content for the modal and appends it
     var errorMessageEl = document.createElement("h3");
     errorMessageEl.classList.add("is-size-2", "has-text-centerd", "my-3");
     errorMessageEl.textContent = "There was a problem connecting with IMDb";
@@ -93,13 +107,13 @@ var catchDisplay = function () {
 
 // Chooses a random actor from the saved array to start the game
 var randomStartingActor = function () {
+    // Creates a new array without Kevin Bacon
     var possibleStartingActors = savedActorsArr.filter(function (actor) {
         return actor.name != "Kevin Bacon";
-    })
-
+    });
+    // Randomly chooses an actor from the new array and assigns that actor to chosenActor
     randomArrPosition = Math.floor(Math.random() * possibleStartingActors.length);
     chosenActor = possibleStartingActors[randomArrPosition];
-    console.log(chosenActor.name);
 };
 
 // Searches for an actor using the IMDb API. Only use this after we're done with the searchmovie() and movieChoice() functions
@@ -117,6 +131,7 @@ var searchActor = function (name) {
                     // Runs an anonymous function to handle the fetched data
                     .then(function (data) {
                         console.log(data);
+                        // Checks for an errorMessage and displays if there is one
                         if (data.errorMessage) {
                             console.log(data.errorMessage);
                             okResponseProblemDisplay(data);
@@ -135,17 +150,18 @@ var searchActor = function (name) {
                                 resultsArr.push(actorResultObj);
 
                             };
-                            // Cycles to the next API key in the array
                             console.log(resultsArr);
+                            // Displays the modal with its content emptied
                             displayModal();
+                            // Displays the actors that returned from the search as button choices
                             createResultBtns("actor");
                         }
+                        // Cycles to the next API key in the array
                         apiKeyCycler();
                     });
             }
 
             else {
-                displayModal();
                 searchProblemDisplay();
             }
         })
@@ -219,6 +235,7 @@ var searchMovie = function (movie) {
                             };
                             // Cycles to the next API key in the array
                             console.log(resultsArr);
+                            // Displays the modal with its content emptied
                             displayModal();
                             createResultBtns("movie");
                         };
@@ -227,7 +244,6 @@ var searchMovie = function (movie) {
             }
 
             else {
-                displayModal();
                 searchProblemDisplay();
             };
         })
@@ -283,19 +299,19 @@ var getFullCast = function (movieID) {
                             console.log(data.actors);
                             // Sets the returned cast data to the fullCast variable
                             fullCast = data.actors;
-                            // Cycles to the next API key in the array
+                            document.querySelector(".is-loading").classList.remove("is-loading");
                         }
-
+                        
                         else {
                             okResponseProblemDisplay();
                             resetPoster();
                         }
+                        // Cycles to the next API key in the array
                         apiKeyCycler();
                     });
             }
 
             else {
-                displayModal();
                 searchProblemDisplay();
             };
         })
@@ -303,7 +319,6 @@ var getFullCast = function (movieID) {
         .catch(function (error) {
             catchDisplay();
         });
-    document.querySelector(".is-loading").classList.remove("is-loading");
 };
 
 // Checks if an actor is listed in the full cast
@@ -398,7 +413,6 @@ var incorrectChoiceHandler = function (arg) {
         continueBtn.textContent = "Find a Connecting Actor";
     }
     modalContentEl.appendChild(continueBtn);
-    resetPoster();
 };
 
 // Checks if an object (the chosenActor object) is already saved in savedActorsArr
@@ -600,101 +614,12 @@ var displayChoiceActor = function () {
     modalContentEl.appendChild(continueBtn);
 };
 
-var searchMovieBtnHandler = function () {
-    var name = movieInputEl.value;
-    console.log(name);
-    searchMovie(name);
-    movieInputEl.value = "";
-    searchMovieBtn.classList.add("is-loading");
-    movieSearchPressed = true;
-};
-
 var clearModal = function () {
     var child = modalContentEl.lastElementChild;
     while (child) {
         child.remove();
         child = modalContentEl.lastElementChild;
     };
-};
-
-var createResultBtns = function (specialClass) {
-    for (i = 0; i < resultsArr.length; i++) {
-        var resultBtnEl = document.createElement("button");
-        resultBtnEl.classList.add("button", "is-fullwidth", "m-1", specialClass);
-        resultBtnEl.textContent = resultsArr[i].name + " " + resultsArr[i].description;
-        resultBtnEl.setAttribute("data-id", resultsArr[i].id);
-        resultBtnEl.setAttribute("data-url", resultsArr[i].imgUrl);
-        modalContentEl.appendChild(resultBtnEl);
-    };
-    searchMovieBtn.classList.remove("is-loading");
-};
-
-var closeModal = function () {
-    clearModal();
-    modalEl.classList.remove("is-active");
-};
-
-var modalBtnHandler = function (event) {
-    if (event.target.classList.contains("button") && event.target.classList.contains("movie")) {
-        event.target.classList.add("is-loading");
-        movieID = event.target.dataset.id;
-        posterUrl = event.target.dataset.url;
-        movieChoice(movieID);
-        getFullCast(movieID);
-    };
-
-    if (event.target.classList.contains("button") && event.target.classList.contains("check-full-cast")) {
-        checkFullCastHandler(chosenActor.name);
-    }
-
-    if (event.target.classList.contains("button") && event.target.classList.contains("find-connection")) {
-        if (event.target.textContent == "Find a Connecting Actor") {
-            actorInputEl.focus();
-        }
-
-        else if (event.target.textContent == "Find a Connecting Movie") {
-            movieInputEl.focus();
-            resetDisplay();
-        }
-        closeModal();
-    }
-
-    if (event.target.classList.contains("button") && event.target.classList.contains("actor")) {
-        event.target.classList.add("is-loading");
-        actorID = event.target.dataset.id;
-        actorImg = event.target.dataset.url;
-        actorChoice(actorID);
-    };
-}
-
-var displayChoiceMovie = function () {
-    posterEl.setAttribute("src", chosenMovie.imgUrl);
-    posterEl.setAttribute("alt", chosenMovie.name + " poster");
-    clearModal();
-    var choiceEl = document.createElement("h3");
-    choiceEl.classList.add("is-size-2", "has-text-centerd", "my-3");
-    choiceEl.textContent = "You have chosen " + chosenMovie.name + " " + chosenMovie.description;
-    modalContentEl.appendChild(choiceEl);
-    var continueBtn = document.createElement("button");
-    continueBtn.classList.add("button", "is-fullwidth", "check-full-cast");
-    continueBtn.textContent = "Check";
-    modalContentEl.appendChild(continueBtn);
-};
-
-var displayChoiceActor = function () {
-    toActorEl.setAttribute("src", chosenActor.imgUrl);
-    toActorEl.setAttribute("alt", chosenActor.name + " portrait");
-    toActorLabelEl.classList.remove("is-invisible");
-    toActorLabelEl.textContent = chosenActor.name;
-    clearModal();
-    var choiceEl = document.createElement("h3");
-    choiceEl.classList.add("is-size-2", "has-text-centerd", "my-3");
-    choiceEl.textContent = "You have chosen " + chosenActor.name + " " + chosenActor.description;
-    modalContentEl.appendChild(choiceEl);
-    var continueBtn = document.createElement("button");
-    continueBtn.classList.add("button", "is-fullwidth", "check-full-cast");
-    continueBtn.textContent = "Check";
-    modalContentEl.appendChild(continueBtn);
 };
 
 var searchActorBtnHandler = function () {
@@ -720,8 +645,8 @@ var displayMovieSearched = function(savedMoviesArr) {
         var movieSelected = document.createElement("li")
         console.log(savedMoviesArr[0])
         movieSelected.textContent = savedMoviesArr[i]
+        movieHistorylist.appendChild(movieSelected)
     }
-    movieHistorylist.appendChild(movieSelected)
     movieHistoryEl.appendChild(movieHistorylist)
     movieHistorydiv.appendChild(movieHistoryEl)
 
@@ -740,10 +665,10 @@ var displayActorSearched = function() {
     }
 }
 
-// after the search movie button click
-document.getElementById("searchMovie").addEventListener("click", displayMovieSearched())
-//after the search actor button click
-document.getElementById("searchActor").addEventListener("click", displayActorSearched())
+// // after the search movie button click
+// document.getElementById("searchMovie").addEventListener("click", displayMovieSearched)
+// //after the search actor button click
+// document.getElementById("searchActor").addEventListener("click", displayActorSearched)
 
 
 
@@ -765,7 +690,9 @@ var resetPoster = function () {
     posterEl.setAttribute("alt", "");
 };
 
+// Function for connecting to Kevin Bacon
 var victoryHandler = function () {
+    // Clears the modal of content, then creates and adds new content
     clearModal();
     var youWinEl = document.createElement("h3");
     youWinEl.classList.add("is-size-2", "has-text-centerd", "my-3");
@@ -781,10 +708,15 @@ var victoryHandler = function () {
     modalContentEl.appendChild(playAgainBtn);
 }
 
+// Sets up a new game
 var newGame = function () {
+    // Loads the saved actors and movies arrays
     loadHistory();
+    // Chooses a new starting actor
     randomStartingActor();
+    // Removes any actor imgages
     resetDisplay();
+    // Removes any poster image
     resetPoster();
 }
 
