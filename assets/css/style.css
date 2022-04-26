@@ -1,3 +1,6 @@
+:root {
+    --primary-color: #707070;  
+}
 .center, .center-column, .top, .right, .bottom, .left {
 	display: flex;
 	justify-content: center;
@@ -34,7 +37,10 @@
     color:black;
 }
 
-
+header {
+   z-index: 9999;
+   font-family: 'Koulen', cursive;
+}
 /*header {
     display: flex;
     justify-content: space-between;
@@ -84,3 +90,4 @@ position: relative;
     color: white !important;
     padding: 10px;
 }
+
