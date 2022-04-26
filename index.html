@@ -5,42 +5,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Inline+One&family=Koulen&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <!-- <link rel="stylesheet" href="./assets/css/debug.css"/> -->
     <title>6 Degrees of Kevin Bacon</title>
 </head>
 
 <body>
-    <header>
-        <h1 class="is-size-1">6 Degrees of Kevin Bacon</h1>
+    <section class="hero is-halfheight">
+        <nav class="hero-head">
+            <div class="columns is-mobile is-marginless heading has-text-weight-bold">
+                <div class="column left">
+                    <p class="navbar-item textblk">Group 3</p>
+                </div>
+                <div class="column center desktop">
+                    <a class="navbar-item textblk" href="https://github.com/wgrout87" target="_blank">Will's Portfolio</a>
+                    <a class="navbar-item textblk" href="https://github.com/leeshekchun" target="_blank">Chris's Portfolio</a>
+                    <a class="navbar-item textblk" href="https://github.com/DawnWogerman" target="_blank">Dawn's Portfolio</a>
+                </div>
+                <div class="column right">
+                    <a class="navbar-item textblk" href="https://www.imdb.com" target=_blank">IMBDB</a>
+                    <a class="navbar-item textblk" href="https://www.omdb.org/en/us" target="_blank">OMDB</a>
+                    <a class="navbar-item textblk" href="https://en.wikipedia.org/wiki/Kevin_Bacon" target="_blank">Kevin Bacon Wiki</a>
+                </div>
+            </div>
+        </nav>
+        <header class="hero-body textblk is-size-1 is-text-weight-bold has-text-centered">
+            <div class="columns">
+                <div class="column is-12">
+                    <h1 title>6 Degrees of<br> Kevin Bacon</h1>
+                </div>
+                <div class="column is-12">
 
-        <div class="headerNav">
-            <!-- <a href="">One</a>
-            <a href="">Two</a>
-            <a href="">Three</a>
-            <a href="">Four</a> -->
-        </div>
-
-    </header>
-
-
-    <!-- <div class="actorImg">
-    <img src="" alt="StartingActor">
-    <img src="" alt="actor2">
-    <img src="" alt="actor3">
-    <img src="" alt="actor4">
-    <img src="" alt="actor5">
-    <img src="" alt="actor6">
-    <img src="" alt="KevinBacon">
-</div>
-<br> -->
-
-    <div class="box-wrapper columns m-2">
-
+                </div>
+                <div class="column is-12">
+                    <h1>How to Play</h1>
+                </div>
+                
+            </div>
+            
+        </header>
+    </section>
+       <div class="box-wrapper columns m-2">
         <section class="column leftBox-wrapper is-one-quarter">
 
             <div>
                 <h2 class="is-size-3">Search for a movie:</h2>
+
                 <input class="input is-fullwidth my-1" type="text" id="movie-search" placeholder="Movie Search">
                 <button class="button is-fullwidth my-1" id="searchMovie">Search</button>
             </div>
@@ -66,12 +82,21 @@
                     <img id="poster" src="" alt="" name="poster" />
                 </figure>
 
-                <!-- <div class="posterDescription">
-                    <p>Short Synopsis</p>
-                </div> -->
+          <div>
+            <p>Search History</p>
+            
+              <div class="searchHistory">
 
+                <div id="movieHistory">
+                  <p>Movie</p>
+                </div>
+                
+                  <div id="actorHistory">
+                    <p>Actor</p>
+                  </div>
+
+              </div>
             </div>
-
         </section>
 
 
@@ -94,7 +119,6 @@
             </div>
 
         </section>
-
     </div>
     
     <div class="modal">
@@ -110,3 +134,4 @@
 </body>
 
 </html>
+
