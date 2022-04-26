@@ -633,20 +633,23 @@ var correctChoiceHandler = function (arg) {
     modalContentEl.appendChild(userChoiceEl);
     // Creates a button to continue the game 
     var continueBtn = document.createElement("button");
-    continueBtn.classList.add("button", "is-fullwidth", "find-connection");
+    continueBtn.classList.add("button", "is-fullwidth");
 
     // If "movie" was passed into the function, the added button will direct the user to the actor search 
     if (arg == "movie" && chosenActor.name !== "Kevin Bacon") {
+        continueBtn.classList.add("find-connection");
         continueBtn.textContent = "Find a Connecting Actor";
     }
 
     // If "actor" was passed into the function, the added button will direct the user to the mvoie search
     else if (arg == "actor" && chosenActor.name !== "Kevin Bacon") {
+        continueBtn.classList.add("find-connection");
         continueBtn.textContent = "Find a Connecting Movie";
     }
 
     // If Kevin Bacon was chosen, the user wins and the added button will handle the victory
     else {
+        continueBtn.classList.add("victory");
         continueBtn.textContent = "Victory!"
     }
     modalContentEl.appendChild(continueBtn);
