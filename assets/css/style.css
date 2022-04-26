@@ -37,20 +37,13 @@ position: relative;
     position: absolute;
 }
 
-.box-wrapper {
-    display: flex;
+.label {   
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color:rgb(0,0,0,.8);
+    color: white !important;
+    padding: 10px;
 }
-.leftBox-wrapper {
-width: 35%;
-border: 1px solid black;
-}
-
-.middleBox-wrapper {
-width: 35%;
-border: 1px solid black;
-}
-
-.rightBox-wrapper {
-    width: 35%;
-    border: 1px solid black;
-    }

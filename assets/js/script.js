@@ -239,6 +239,44 @@ var loadHistory = function () {
     savedMoviesArr = JSON.parse(localStorage.getItem("Movies"));
     savedActorsArr = JSON.parse(localStorage.getItem("Actors"));
 };
+
+
+/////////////// CHRIS added this ///////////////
+// Display movie and actor search history
+var displayMovieSearched = function(savedMoviesArr) {
+    var movieHistorydiv = document.getElementById("movieHistory")
+    var movieHistoryEl = document.createElement("div")
+    var movieHistorylist = document.createElement("ul")
+
+    for (let i=0; i < savedMoviesArr.length; i++) {
+        var movieSelected = document.createElement("li")
+        console.log(savedMoviesArr[0])
+        movieSelected.textContent = savedMoviesArr[i]
+    }
+    movieHistorylist.appendChild(movieSelected)
+    movieHistoryEl.appendChild(movieHistorylist)
+    movieHistorydiv.appendChild(movieHistoryEl)
+
+}
+
+
+var displayActorSearched = function() {
+    var ActorHistorydiv = document.getElementById("actorHistory")
+    var actorHistoryEl = document.createElement("div")
+    var movieHistorylist = document.createElement("ul")
+
+    for (let i=0; i < savedActorsArr.length; i++) {
+        var actorSelected = document.createElement("li")
+        console.log(savedActorsArr[0])
+        actorSelected.textContent = savedActorsArr[i]
+    }
+}
+
+// after the search movie button click
+document.getElementById("searchMovie").addEventListener("click", displayMovieSearched())
+//after the search actor button click
+document.getElementById("searchActor").addEventListener("click", displayActorSearched())
+
 // END FUNCTION DECLARATIONS
 
 
