@@ -462,7 +462,7 @@ var displayChoiceMovie = function () {
 };
 
 var getMovieSynopsis = function () {
-    fetch("http://www.omdbapi.com/?apikey=ce77b7fe&i=" + chosenMovie.id + "&plot")
+    fetch("https://www.omdbapi.com/?apikey=ce77b7fe&i=" + chosenMovie.id + "&plot")
         // Runs an anonymous function on the response
         .then(function (response) {
             // Checks if the response was okay
