@@ -833,7 +833,7 @@ var displayMovieSearched = function() {
     for (let i=0; i < savedMoviesArr.length; i++) {
         var movieSelected = document.createElement("li")
         console.log(savedMoviesArr[0])
-        movieSelected.textContent = savedMoviesArr[i]
+        movieSelected.textContent = savedMoviesArr[i].name + " " + savedMoviesArr[i].description
         movieHistorylist.appendChild(movieSelected)
     }
     movieHistoryEl.appendChild(movieHistorylist)
