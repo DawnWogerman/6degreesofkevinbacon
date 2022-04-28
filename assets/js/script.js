@@ -740,13 +740,6 @@ var displayActorSearched = function() {
     }
 }
 
-// after the search movie button click
-document.getElementById("searchMovie").addEventListener("click", displayMovieSearched())
-//after the search actor button click
-document.getElementById("searchActor").addEventListener("click", displayActorSearched())
-
-
-
 var resetDisplay = function () {
     fromActorEl.setAttribute("src", chosenActor.imgUrl);
     fromActorEl.setAttribute("alt", chosenActor.name + " portrait");
