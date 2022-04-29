@@ -864,12 +864,7 @@ var victoryHandler = function () {
 
 /////////////// CHRIS added this ///////////////
 // Display movie and actor search history
-<<<<<<< HEAD
-var displayMovieSearched = function () {
-    var movieHistorydiv = document.getElementById("movieHistory")
-=======
 var displayMovieSearched = function() {
->>>>>>> c2a4587f9ea472d19696a88305e459b88afe5c19
     var movieHistoryEl = document.createElement("div")
     var movieHistorylist = document.createElement("ul")
 
