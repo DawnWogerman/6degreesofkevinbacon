@@ -864,33 +864,54 @@ var victoryHandler = function () {
 
 /////////////// CHRIS added this ///////////////
 // Display movie and actor search history
+<<<<<<< HEAD
 var displayMovieSearched = function () {
     var movieHistorydiv = document.getElementById("movieHistory")
+=======
+var displayMovieSearched = function() {
+>>>>>>> c2a4587f9ea472d19696a88305e459b88afe5c19
     var movieHistoryEl = document.createElement("div")
     var movieHistorylist = document.createElement("ul")
 
     for (let i = 0; i < savedMoviesArr.length; i++) {
         var movieSelected = document.createElement("li")
         console.log(savedMoviesArr[0])
-        movieSelected.textContent = savedMoviesArr[i]
+        movieSelected.textContent = savedMoviesArr[i].name + " " + savedMoviesArr[i].description
         movieHistorylist.appendChild(movieSelected)
     }
     movieHistoryEl.appendChild(movieHistorylist)
-    movieHistorydiv.appendChild(movieHistoryEl)
+    modalContentEl.appendChild(movieHistoryEl)
 
 }
-
+var displayMovieSearchModal = function() {
+    displayModal()
+    displayMovieSearched();
+}
 
 var displayActorSearched = function () {
     var ActorHistorydiv = document.getElementById("actorHistory")
     var actorHistoryEl = document.createElement("div")
-    var movieHistorylist = document.createElement("ul")
+    var actorHistorylist = document.createElement("ul")
 
     for (let i = 0; i < savedActorsArr.length; i++) {
         var actorSelected = document.createElement("li")
         console.log(savedActorsArr[0])
-        actorSelected.textContent = savedActorsArr[i]
+        actorSelected.textContent = savedActorsArr[i].name + " " + savedActorsArr[i].description
+        var removeActor = document.createElement("button")
+        removeActor.textContent = "Remove"
+        removeActor.setAttribute("class", "is-danger")
+        removeActor.setAttribute("data-id", savedActorsArr[i].id)
+        actorSelected.appendChild(removeActor)
+        actorHistorylist.appendChild(actorSelected)
     }
+    
+    actorHistoryEl.appendChild(actorHistorylist)
+    modalContentEl.appendChild(actorHistoryEl)
+}
+
+var displayActorSearchModal = function() {
+    displayModal()
+    displayActorSearched()
 }
 // END FUNCTION DECLARATIONS
 
