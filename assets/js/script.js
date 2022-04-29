@@ -760,6 +760,7 @@ var searchActorBtnHandler = function () {
 
 // Function for handling all of the possible modal buttons
 var modalBtnHandler = function (event) {
+    // Movie Results Buttons
     if (event.target.classList.contains("button") && event.target.classList.contains("movie")) {
         // Retrieves the id and url information that was stored into the button HTML
         movieID = event.target.dataset.id;
@@ -770,11 +771,12 @@ var modalBtnHandler = function (event) {
         getFullCast(movieID);
     };
 
-    // Checks if the chosen actor was in the chosen movie
+    // Check Button
     if (event.target.classList.contains("button") && event.target.classList.contains("check-full-cast")) {
         checkFullCastHandler(chosenActor.id);
     }
 
+    // Find a Connecting * Buttons
     if (event.target.classList.contains("button") && event.target.classList.contains("find-connection")) {
         // Logic for handling the procedure of the game if a correct movie match was given, or an incorrect actor
         if (event.target.textContent == "Find a Connecting Actor") {
@@ -802,7 +804,7 @@ var modalBtnHandler = function (event) {
         closeModal();
     }
 
-    // Button for choosing an actor
+    // Actor Results Buttons
     if (event.target.classList.contains("button") && event.target.classList.contains("actor")) {
         // Retrieves the id and url information that was stored into the button HTML
         actorID = event.target.dataset.id;
@@ -811,7 +813,7 @@ var modalBtnHandler = function (event) {
         actorChoice(actorID);
     };
 
-    // Button for going back and choosing a movie or actor again from the returned search results
+    // Go Back Button
     if (event.target.classList.contains("button") && event.target.classList.contains("go-back")) {
         // Actor results will display again if the actorSearchBtn was most recently pressed
         if (actorSearchPressed == true) {
@@ -826,17 +828,33 @@ var modalBtnHandler = function (event) {
         };
     };
 
-    // Button for when the game is won
+    // Victory Button
     if (event.target.classList.contains("button") && event.target.classList.contains("victory")) {
         victoryHandler();
     }
 
-    // Button for a play again option
+    // Play Again Button
     if (event.target.classList.contains("button") && event.target.classList.contains("play-again")) {
         // Closes the modal
         closeModal();
         // Resets the game with a new starting actor, and puts the movie search into focus
         newGame();
+    }
+
+    // Remove Button
+    if (event.target.classList.contains("button") && event.target.classList.contains("is-danger")) {
+        // Loops through the array of saved actors
+        for (i = 0; i < savedActorsArr.length; i++) {
+            // If the ID matches the ID saved in the HTML dataset...
+            if (savedActorsArr[i].id == event.target.dataset.id) {
+                // ...That saved object will be removed
+                savedActorsArr.splice(i, 1);
+            };
+        };
+        // The modal content is adjusted to display without the removed entry
+        displayActorSearchModal();
+        // The altered savedActorsArr is saved
+        saveHistory();
     }
 };
 
@@ -884,17 +902,16 @@ var displayMovieSearchModal = function() {
 }
 
 var displayActorSearched = function () {
-    var ActorHistorydiv = document.getElementById("actorHistory")
     var actorHistoryEl = document.createElement("div")
     var actorHistorylist = document.createElement("ul")
 
     for (let i = 0; i < savedActorsArr.length; i++) {
         var actorSelected = document.createElement("li")
-        console.log(savedActorsArr[0])
+        actorSelected.setAttribute("class", "m-1 is-flex is-justify-content-space-between")
         actorSelected.textContent = savedActorsArr[i].name + " " + savedActorsArr[i].description
         var removeActor = document.createElement("button")
         removeActor.textContent = "Remove"
-        removeActor.setAttribute("class", "is-danger")
+        removeActor.setAttribute("class", "button is-danger")
         removeActor.setAttribute("data-id", savedActorsArr[i].id)
         actorSelected.appendChild(removeActor)
         actorHistorylist.appendChild(actorSelected)
