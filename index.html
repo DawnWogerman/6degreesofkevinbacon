@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,36 +30,43 @@
                     <a class="navbar-item textblk" href="https://github.com/DawnWogerman" target="_blank">Dawn's Portfolio</a>
                 </div>
                 <div class="column right">
-                    <a class="navbar-item textblk" href="https://www.imdb.com" target=_blank">IMBDB</a>
+                    <a class="navbar-item textblk" href="https://www.imdb.com" target="_blank">IMBDB</a>
                     <a class="navbar-item textblk" href="https://www.omdb.org/en/us" target="_blank">OMDB</a>
                     <a class="navbar-item textblk" href="https://en.wikipedia.org/wiki/Kevin_Bacon" target="_blank">Kevin Bacon Wiki</a>
                 </div>
             </div>
         </nav>
         <header class="hero-body textblk is-size-1 is-text-weight-bold has-text-centered">
-            <div class="columns">
+            <div class="columns is-mobile">
                 <div class="column is-12">
-                    <h1 title>6 Degrees of<br> Kevin Bacon</h1>
+                    <h1>6 Degrees of<br> Kevin Bacon</h1>
+                </div>
+                <!--Empty column to try to fix formatting of the header-->
+                <div class="column is-12">
                 </div>
                 <div class="column is-12">
-
-                </div>
-                <div class="column is-12">
-                    <h1>How to Play</h1>
-                </div>
+                </div> 
             </div>
         </header>
     </section>
-    <section class="is-medium">
+    <section class="is-fullwidth textblk">
+        <div class="content howtoplay">
         <h1> How to Play</h1>
+        <ol>
+            <li>Search for a movie the actor pictured is in.</li>
+            <li>Pick a movie from the list provided.</li>
+            <li>If correct, search for a connecting actor from the movie selected</li>
+            <li>Repeat the process until you reach a connection to Kevin Bacon</li>
+        </ol>
+        </div>
     </section>
        <div class= "columns">
         <section class="column is-one-quarter">
             <div class="control">
                 <!--<h2 class="is-size-3">Search for a movie:</h2>-->
-                <label class="label-form">Search a movie the actor below was in:</label>
+                <label class="label-form textblk center">Search a movie the actor below was in:</label>
                 <input class="input is-fullwidth my-1" type="text" id="movie-search" placeholder="Movie Search">
-                <button class="button is-fullwidth my-1" id="searchMovie">Search</button>
+                <button class="button is-fullwidth my-1 is-dark" id="searchMovie">Search</button>
             </div>
             <div class="leftSection">
                 <div class="fromActorImg actor-choice is-relative">
@@ -69,29 +76,24 @@
                     </figure>
                 </div>
             </div>
-
         </section>
-
-
         <section class="column middleBox is-half">
-
+            <div>
+                Testing 
+            
             <div class="middleSection">
-
                 <figure class="image">
                     <label class="label label-poster is-size-4 is-invisible" id="posterLabel" for="poster"></label>
                     <img id="poster" src="" alt="" name="poster" />
                 </figure>
-
+            </div>
+        </div>   
         </section>
-
-
-
-        <section class="column rightBox-wrapper is-one-quarter">
-
-            <div>
-                <h2 class="is-size-3">Search for a connecting actor:</h2>
+        <section class="column is-one-quarter">
+            <div class="control">
+                <label class="label-form textblk center">Search for a connecting actor:</label>
                 <input class="input is-fullwidth my-1" type="text" id="actor-search" placeholder="Actor Search">
-                <button class="button is-fullwidth my-1" id="searchActor" disabled>Search</button>
+                <button class="button is-fullwidth my-1 is-dark" id="searchActor" disabled>Search</button>
             </div>
 
             <div class="rightSection">
@@ -102,7 +104,6 @@
                     </figure>
                 </div>
             </div>
-
         </section>
     </div>
     
@@ -114,8 +115,6 @@
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
-
-    
     <div>
         <p>Search History</p>
         
