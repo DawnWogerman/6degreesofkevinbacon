@@ -28,6 +28,8 @@ var savedActorsArr = [{ imgUrl: "https://imdb-api.com/images/original/MV5BMTQyMT
 // Set Kevin Bacon's information to a variable so that a non-classic version of the game can be created where Kevin Bacon is not the destination actor
 var kevinBacon = { imgUrl: "https://imdb-api.com/images/original/MV5BOTQxMTEyMjI0NV5BMl5BanBnXkFtZTgwODE4ODAzMjE@._V1_Ratio0.7273_AL_.jpg", name: "Kevin Bacon", id: "nm0000102", description: "(I) (Actor, Footloose (1984))" };
 var savedMoviesArr = [];
+var savedActorNames = [];
+var savedMovieNames = [];
 var chosenActor = {};
 var chosenMovie = null;
 var fullCast = null;
@@ -200,7 +202,42 @@ var checkSavedMoviesArr = function (obj) {
 var saveHistory = function () {
     localStorage.setItem("Movies", JSON.stringify(savedMoviesArr));
     localStorage.setItem("Actors", JSON.stringify(savedActorsArr));
+    // Reassigns the arrays of saved actor and movie names to update them any time new info is saved
+    assignSavedActorNames();
+    assignSavedMovieNames();
 };
+
+// Creates an array that is just the names of the actors in the savedActorsArr array
+var assignSavedActorNames = function () {
+    // Resets savedActorNames so that duplicates don't appear in the array every time the function is called
+    savedActorNames = [];
+    for (i = 0; i < savedActorsArr.length; i++) {
+        savedActorNames.push(savedActorsArr[i].name);
+    };
+};
+
+// Creates an array that is just the names of the movies in the savedMoviesArr array
+var assignSavedMovieNames = function () {
+    // Resets savedMovieNames so that duplicates don't appear in the array every time the function is called
+    savedMovieNames = [];
+    for (i = 0; i < savedMoviesArr.length; i++) {
+        savedMovieNames.push(savedMoviesArr[i].name);
+    };
+};
+
+// Adds autocomplete to the movie search input based on the saved movie names
+$(function () {
+    $("#movie-search").autocomplete({
+        source: savedMovieNames
+    });
+});
+
+// Adds autocomplete to the actor search input based on the saved actor names
+$(function () {
+    $("#actor-search").autocomplete({
+        source: savedActorNames
+    });
+});
 
 // Function for loading movie and actor search results
 var loadHistory = function () {
@@ -940,5 +977,7 @@ modalContentEl.addEventListener("click", modalBtnHandler);
 
 // BEGIN FUNCTIONS TO RUN ON LOAD
 newGame();
+assignSavedActorNames();
+assignSavedMovieNames();
 console.log(savedActorsArr);
 // END FUNCTIONS TO RUN ON LOAD
