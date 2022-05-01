@@ -131,6 +131,10 @@ nav a {
     padding: 10px;
 }
 
+.buttonDestActor {
+    margin-right: 20px;
+}
+
 #poster {
     max-height: 800px;
     max-width: 600px;
