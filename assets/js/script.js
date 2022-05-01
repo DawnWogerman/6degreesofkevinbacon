@@ -30,6 +30,8 @@ var savedActorsArr = [{ imgUrl: "https://imdb-api.com/images/original/MV5BMTQyMT
 // Set Kevin Bacon's information to a variable so that a non-classic version of the game can be created where Kevin Bacon is not the destination actor
 var kevinBacon = { imgUrl: "https://imdb-api.com/images/original/MV5BOTQxMTEyMjI0NV5BMl5BanBnXkFtZTgwODE4ODAzMjE@._V1_Ratio0.7273_AL_.jpg", name: "Kevin Bacon", id: "nm0000102", description: "(I) (Actor, Footloose (1984))" };
 var savedMoviesArr = [];
+var savedActorNames = [];
+var savedMovieNames = [];
 var chosenActor = {};
 var chosenMovie = null;
 var fullCast = null;
@@ -61,7 +63,9 @@ var newGame = function () {
     searchActorBtn.disabled = true;
     // Disables the searchMovieBtn
     searchMovieBtn.disabled = false;
-}
+    displayModal();
+    gameChoice();
+};
 
 // Chooses a random actor from the saved array to start the game
 var randomStartingActor = function () {
@@ -70,8 +74,21 @@ var randomStartingActor = function () {
         return actor.name != kevinBacon.name;
     });
     // Randomly chooses an actor from the new array and assigns that actor to chosenActor
-    randomArrPosition = Math.floor(Math.random() * possibleStartingActors.length);
+    var randomArrPosition = Math.floor(Math.random() * possibleStartingActors.length);
     chosenActor = possibleStartingActors[randomArrPosition];
+};
+
+// Chooses a random actor from the saved array to be the end goal actor
+var randomEndingActor = function () {
+    // Creates a new array without Kevin Bacon or the starting actor
+    var possibleEndingActors = savedActorsArr.filter(function (actor) {
+        if (actor.name != chosenActor.name && actor.name != "Kevin Bacon") {
+            return actor.name;
+        }
+    });
+    // Randomly chooses an actor from the new array and assigns that actor to kevinBacon
+    var randomArrPosition = Math.floor(Math.random() * possibleEndingActors.length);
+    kevinBacon = possibleEndingActors[randomArrPosition];
 };
 // End new game functions
 
@@ -202,7 +219,42 @@ var checkSavedMoviesArr = function (obj) {
 var saveHistory = function () {
     localStorage.setItem("Movies", JSON.stringify(savedMoviesArr));
     localStorage.setItem("Actors", JSON.stringify(savedActorsArr));
+    // Reassigns the arrays of saved actor and movie names to update them any time new info is saved
+    assignSavedActorNames();
+    assignSavedMovieNames();
 };
+
+// Creates an array that is just the names of the actors in the savedActorsArr array
+var assignSavedActorNames = function () {
+    // Resets savedActorNames so that duplicates don't appear in the array every time the function is called
+    savedActorNames = [];
+    for (i = 0; i < savedActorsArr.length; i++) {
+        savedActorNames.push(savedActorsArr[i].name);
+    };
+};
+
+// Creates an array that is just the names of the movies in the savedMoviesArr array
+var assignSavedMovieNames = function () {
+    // Resets savedMovieNames so that duplicates don't appear in the array every time the function is called
+    savedMovieNames = [];
+    for (i = 0; i < savedMoviesArr.length; i++) {
+        savedMovieNames.push(savedMoviesArr[i].name);
+    };
+};
+
+// Adds autocomplete to the movie search input based on the saved movie names
+$(function () {
+    $("#movie-search").autocomplete({
+        source: savedMovieNames
+    });
+});
+
+// Adds autocomplete to the actor search input based on the saved actor names
+$(function () {
+    $("#actor-search").autocomplete({
+        source: savedActorNames
+    });
+});
 
 // Function for loading movie and actor search results
 var loadHistory = function () {
@@ -260,6 +312,32 @@ var createResultBtns = function (specialClass) {
         resultBtnEl.setAttribute("data-url", resultsArr[i].imgUrl);
         modalContentEl.appendChild(resultBtnEl);
     };
+};
+
+var gameChoice = function () {
+    var promptEl = document.createElement("h3");
+    promptEl.classList.add("is-size-2", "has-text-centered", "my-3");
+    promptEl.textContent = "Which version would you like to play?";
+    modalContentEl.appendChild(promptEl);
+    var classicEl = document.createElement("button");
+    classicEl.classList.add("button", "is-fullwidth", "classic");
+    classicEl.textContent = "Classic - Connect to Kevin Bacon";
+    modalContentEl.appendChild(classicEl);
+    var randomEl = document.createElement("button");
+    randomEl.classList.add("button", "is-fullwidth", "random");
+    randomEl.textContent = "Random - Connect to a Random Actor";
+    modalContentEl.appendChild(randomEl);
+};
+
+var displayDestination = function () {
+    var destinationEl = document.createElement("h3");
+    destinationEl.classList.add("is-size-2", "has-text-centered", "my-3");
+    destinationEl.textContent = "Your Destination Actor is " + kevinBacon.name;
+    modalContentEl.appendChild(destinationEl);
+    var gotItEl = document.createElement("button");
+    gotItEl.classList.add("button", "is-fullwidth", "got-it")
+    gotItEl.textContent = "Got it!";
+    modalContentEl.appendChild(gotItEl);
 };
 // End Modal Functions
 
@@ -858,6 +936,30 @@ var modalBtnHandler = function (event) {
         // The altered savedActorsArr is saved
         saveHistory();
     }
+
+    // Classic version button
+    if (event.target.classList.contains("button") && event.target.classList.contains("classic")) {
+        // Sets the destination actor in the kevinBacon variable (as the man himself in this case)
+        kevinBacon = { imgUrl: "https://imdb-api.com/images/original/MV5BOTQxMTEyMjI0NV5BMl5BanBnXkFtZTgwODE4ODAzMjE@._V1_Ratio0.7273_AL_.jpg", name: "Kevin Bacon", id: "nm0000102", description: "(I) (Actor, Footloose (1984))" };
+        clearModal();
+        // The destination actor is displayed
+        displayDestination();
+        console.log(kevinBacon.name);
+    };
+
+    // Random version button
+    if (event.target.classList.contains("button") && event.target.classList.contains("random")) {
+        clearModal();
+        // Sets the destination actor in the kevinBacon variable to a random actor
+        randomEndingActor();
+        // The destination actor is displayed
+        displayDestination();
+        console.log(kevinBacon.name);
+    };
+
+    if (event.target.classList.contains("button") && event.target.classList.contains("got-it")) {
+        closeModal();
+    }
 };
 
 // Function for connecting to Kevin Bacon
@@ -884,7 +986,7 @@ var victoryHandler = function () {
 
 /////////////// CHRIS added this ///////////////
 // Display movie and actor search history
-var displayMovieSearched = function() {
+var displayMovieSearched = function () {
     var movieHistoryEl = document.createElement("div")
     var movieHistorylist = document.createElement("ul")
 
@@ -898,7 +1000,7 @@ var displayMovieSearched = function() {
     modalContentEl.appendChild(movieHistoryEl)
 
 }
-var displayMovieSearchModal = function() {
+var displayMovieSearchModal = function () {
     displayModal()
     displayMovieSearched();
 }
@@ -918,12 +1020,12 @@ var displayActorSearched = function () {
         actorSelected.appendChild(removeActor)
         actorHistorylist.appendChild(actorSelected)
     }
-    
+
     actorHistoryEl.appendChild(actorHistorylist)
     modalContentEl.appendChild(actorHistoryEl)
 }
 
-var displayActorSearchModal = function() {
+var displayActorSearchModal = function () {
     displayModal()
     displayActorSearched()
 }
@@ -944,5 +1046,6 @@ historyActorBtn.addEventListener("click",displayActorSearchModal)
 
 // BEGIN FUNCTIONS TO RUN ON LOAD
 newGame();
-console.log(savedActorsArr);
+assignSavedActorNames();
+assignSavedMovieNames();
 // END FUNCTIONS TO RUN ON LOAD
