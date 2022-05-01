@@ -19,12 +19,15 @@
 </head>
 
 <body>
+    <!--Start hero section-->
     <section class="hero is-halfheight">
+        <!--Hero head section navigation-->
         <nav class="hero-head">
             <div class="columns is-mobile is-marginless heading has-text-weight-bold">
                 <div class="column left">
                     <p class="navbar-item textblk">Group 3</p>
                 </div>
+                <!--"desktop hides this navigation when viewed on smaller screens"-->
                 <div class="column center desktop">
                     <a class="navbar-item textblk" href="https://github.com/wgrout87" target="_blank">Will's Portfolio</a>
                     <a class="navbar-item textblk" href="https://github.com/leeshekchun" target="_blank">Chris's Portfolio</a>
@@ -37,6 +40,7 @@
                 </div>
             </div>
         </nav>
+        <!--End navigation-->
         <header class="hero-body textblk is-size-1 is-text-weight-bold has-text-centered">
             <div class="columns is-mobile">
                 <div class="column is-12">
@@ -50,27 +54,32 @@
             </div>
         </header>
     </section>
-    <section class="is-fullwidth textblk">
-        <div class="content howtoplay is-large">
-        <h1> How to Play</h1>
+    <!--Start gameplay instructions-->
+    <section class="is-fullwidth">
+        <div class="content howtoplay is-medium">
+        <h1 class="is-paddingless"> How to Play</h1>
         <div class="container">
-            <ol>
+            <ol class="is-paddingless textblk">
             <li>Search for a movie the actor pictured is in.</li>
             <li>Pick a movie from the list provided.</li>
             <li>If correct, search for a connecting actor from the movie selected</li>
-            <li>Repeat the process until you reach a connection to Kevin Bacon</li>
+            <li>Repeat the process until you reach a connection to <span id="kevinBacon">Kevin Bacon</span></li>
         </ol>
         </div>
         </div>
     </section>
+    <!--End gameplay instructions-->
+    <!--Start columns for main display-->
        <div class= "columns">
-        <section class="column is-one-quarter">
+           <!--start left side movie search and starting actor column-->
+        <section class="column is-one-third">
+            <!--Form to search for a movie-->
             <div class="control">
-                <!--<h2 class="is-size-3">Search for a movie:</h2>-->
-                <label class="label-form textblk center">Search a movie the actor below was in:</label>
+                <label class="label-form textblk center">Search a movie starring the actor pictured below:</label>
                 <input class="input is-fullwidth my-1" type="text" id="movie-search" placeholder="Movie Search">
                 <button class="button is-fullwidth my-1 is-dark" id="searchMovie">Search</button>
             </div>
+            <!--Starting actor-->
             <div class="leftSection">
                 <div class="fromActorImg actor-choice is-relative">
                     <figure class="image">
@@ -79,42 +88,45 @@
                     </figure>
                 </div>
             </div>
+            <!--End starting actor-->
         </section>
-        <section class="column middleBox is-half">
-            <div>
-                Testing 
-            
-            <div class="middleSection">
+        <!--End left column containing starting actor information and search movie-->
+        <!--Start middle column containing search history buttons and movie poster image-->
+        <section class="column middleBox is-one-third">
+            <!--Start search history div-->
+              <div>
+                  <h2 class="is-size-4 center">Search History</h2>
+                    <div class="searchHistory history is-flex">
+                    <!--Button for movie history search-->
+                      <div id="movieHistory" class="historybtn">
+                          <button class="button is-fullwidth is-dark" id="searchMovieHistory">Movie</button>
+                      </div>
+                      <!--Button for actor history search-->
+                      <div id="actorHistory" class="historybtn">
+                            <button class="button is-fullwidth is-dark" id="searchActorHistory">Actor</button>
+                      </div>
+                    </div> 
+                 </div>   
+             <!--Start movie poster image-->
+            <div class="middleSection center">
                 <figure class="image">
+                    <!--Movie plot synopsis-->
                     <label class="label label-poster is-size-4 is-invisible" id="posterLabel" for="poster"></label>
                     <img id="poster" src="" alt="" name="poster" />
               </figure>
-
-          <div>
-            <p>Search History</p>
-            
-              <div class="searchHistory">
-
-                <div id="movieHistory">
-                  <button id="searchMovieHistory">Movie</button>
-                </div>
-                
-                  <div id="actorHistory">
-                    <button id="searchActorHistory">Actor</button>
-                  </div>
-
-              </div>
-
-            </div>
-        </div>   
+              <!--End movie poster image-->
         </section>
-        <section class="column is-one-quarter">
+        <!--End middle column for history and movie poster-->
+        <!--Start right side column for connecting actor-->
+        <section class="column is-one-third">
+            <!--Search form for connecting actor-->
             <div class="control">
                 <label class="label-form textblk center">Search for a connecting actor:</label>
                 <input class="input is-fullwidth my-1" type="text" id="actor-search" placeholder="Actor Search">
                 <button class="button is-fullwidth my-1 is-dark" id="searchActor" disabled>Search</button>
             </div>
-
+            <!--End search form-->
+            <!--Connecting actor image start-->
             <div class="rightSection">
                 <div class="toActorImg actor-choice is-relative">
                     <figure class="image">
@@ -123,9 +135,14 @@
                     </figure>
                 </div>
             </div>
+            <!--End connecting actor image-->
+            <div>
+                <button class="button is-fullwidth is-dark my-1 buttonDestActor" id="destinationActor">Destination Actor</button>
+            </div>
         </section>
+        <!--End right side column for connecting actor-->
     </div>
-    
+    <!--Start modal-->
     <div class="modal">
         <div class="modal-background"></div>
         <div class="modal-content has-background-white py-1">
@@ -133,8 +150,13 @@
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
 
+    <!--End modal-->
+    <!--footer-->
+    <footer>Made by Group 3</footer>
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script src="./assets/js/script.js"></script>
 </body>
 
