@@ -8,6 +8,7 @@
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +63,7 @@
             <li>Search for a movie the actor pictured is in.</li>
             <li>Pick a movie from the list provided.</li>
             <li>If correct, search for a connecting actor from the movie selected</li>
-            <li>Repeat the process until you reach a connection to Kevin Bacon</li>
+            <li>Repeat the process until you reach a connection to <span id="kevinBacon">Kevin Bacon</span></li>
         </ol>
         </div>
         </div>
@@ -105,7 +106,7 @@
                             <button class="button is-fullwidth is-dark" id="searchActorHistory">Actor</button>
                       </div>
                     </div> 
-             </div>
+                 </div>   
              <!--Start movie poster image-->
             <div class="middleSection center">
                 <figure class="image">
@@ -145,10 +146,14 @@
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
+
     <!--End modal-->
-    <footer>
-        &copy; 2022
-    </footer>
+    <!--footer-->
+    <footer>Made by Group 3</footer>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script src="./assets/js/script.js"></script>
 </body>
 
