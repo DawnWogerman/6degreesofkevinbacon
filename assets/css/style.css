@@ -54,11 +54,17 @@ nav a {
     padding: 20px;
     justify-content: center;
     text-align: center;
+    border-bottom: 15px black solid;
+    
 }
 
-.howtoplay ul {
+.howtoplay ol {
     display: inline-block;
-    color: var(--primary-color);
+     
+}
+
+.howtoplay ol li {
+    text-align: left;
 }
 
 .control {
@@ -106,7 +112,14 @@ nav a {
 .actorImgSelect {
     position: absolute;
 }
+.history {
+    padding: 5px;
+}
 
+.historybtn {
+    width: 100% !important; 
+    padding: 5px;
+}
 .label {   
     position: absolute;
     top: 75%;

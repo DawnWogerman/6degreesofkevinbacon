@@ -55,10 +55,10 @@
     </section>
     <!--Start gameplay instructions-->
     <section class="is-fullwidth">
-        <div class="content howtoplay is-large">
+        <div class="content howtoplay is-medium">
         <h1> How to Play</h1>
         <div class="container">
-            <ol class="textblk">
+            <ol class="is-paddingless textblk">
             <li>Search for a movie the actor pictured is in.</li>
             <li>Pick a movie from the list provided.</li>
             <li>If correct, search for a connecting actor from the movie selected</li>
@@ -94,20 +94,20 @@
         <section class="column middleBox is-one-third">
             <!--Start search history div-->
               <div>
-                  <h2 class="is-size-4">Search History</h2>
-                    <div class="searchHistory">
+                  <h2 class="is-size-4 center">Search History</h2>
+                    <div class="searchHistory history is-flex">
                     <!--Button for movie history search-->
-                      <div class="control" id="movieHistory">
-                          <button class="button full-width is-dark" id="searchMovieHistory">Movie</button>
+                      <div id="movieHistory" class="historybtn">
+                          <button class="button is-fullwidth is-dark" id="searchMovieHistory">Movie</button>
                       </div>
                       <!--Button for actor history search-->
-                      <div id="actorHistory">
-                            <button class="button full-width is-dark" id="searchActorHistory">Actor</button>
+                      <div id="actorHistory" class="historybtn">
+                            <button class="button is-fullwidth is-dark" id="searchActorHistory">Actor</button>
                       </div>
                     </div> 
              </div>
              <!--Start movie poster image-->
-            <div class="middleSection">
+            <div class="middleSection center">
                 <figure class="image">
                     <!--Movie plot synopsis-->
                     <label class="label label-poster is-size-4 is-invisible" id="posterLabel" for="poster"></label>
