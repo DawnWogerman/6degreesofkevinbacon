@@ -12,6 +12,8 @@ var toActorLabelEl = document.querySelector("#toActorLabel");
 var modalEl = document.querySelector(".modal");
 var modalContentEl = document.querySelector(".modal-content");
 var modalCloseBtn = document.querySelector(".modal-close");
+var historyMovieBtn = document.querySelector("#searchMovieHistory");
+var historyActorBtn = document.querySelector("#searchActorHistory");
 // END QUERY SELECTORS
 
 
@@ -1036,6 +1038,8 @@ searchMovieBtn.addEventListener("click", searchMovieBtnHandler);
 searchActorBtn.addEventListener("click", searchActorBtnHandler);
 modalCloseBtn.addEventListener("click", closeModal);
 modalContentEl.addEventListener("click", modalBtnHandler);
+historyMovieBtn.addEventListener("click",displayMovieSearchModal)
+historyActorBtn.addEventListener("click",displayActorSearchModal)
 // END EVENT LISTENERS
 
 
