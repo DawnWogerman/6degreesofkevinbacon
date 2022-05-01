@@ -305,7 +305,7 @@ var createResultBtns = function (specialClass) {
     // Loops through the results creating buttons for each
     for (i = 0; i < resultsArr.length; i++) {
         var resultBtnEl = document.createElement("button");
-        resultBtnEl.classList.add("button", "is-fullwidth", "m-1", specialClass);
+        resultBtnEl.classList.add("button", "is-fullwidth", "is-dark", "my-1", specialClass);
         resultBtnEl.textContent = stringSlice(resultsArr[i].name + " " + resultsArr[i].description);
         // Saves important information as data attributes in each button
         resultBtnEl.setAttribute("data-id", resultsArr[i].id);
@@ -320,11 +320,11 @@ var gameChoice = function () {
     promptEl.textContent = "Which version would you like to play?";
     modalContentEl.appendChild(promptEl);
     var classicEl = document.createElement("button");
-    classicEl.classList.add("button", "is-fullwidth", "classic");
+    classicEl.classList.add("button", "is-fullwidth", "is-dark", "my-1", "classic");
     classicEl.textContent = "Classic - Connect to Kevin Bacon";
     modalContentEl.appendChild(classicEl);
     var randomEl = document.createElement("button");
-    randomEl.classList.add("button", "is-fullwidth", "random");
+    randomEl.classList.add("button", "is-fullwidth", "is-dark", "my-1", "random");
     randomEl.textContent = "Random - Connect to a Random Actor";
     modalContentEl.appendChild(randomEl);
 };
@@ -335,7 +335,7 @@ var displayDestination = function () {
     destinationEl.textContent = "Your Destination Actor is " + kevinBacon.name;
     modalContentEl.appendChild(destinationEl);
     var gotItEl = document.createElement("button");
-    gotItEl.classList.add("button", "is-fullwidth", "got-it")
+    gotItEl.classList.add("button", "is-fullwidth", "is-dark", "my-1", "got-it")
     gotItEl.textContent = "Got it!";
     modalContentEl.appendChild(gotItEl);
 };
@@ -527,13 +527,13 @@ var displayChoiceMovie = function () {
     modalContentEl.appendChild(choiceEl);
     // This will be a button to check that the current chosenActor was in the movie chosen by the user
     var checkBtn = document.createElement("button");
-    checkBtn.classList.add("button", "is-fullwidth", "check-full-cast", "is-loading");
+    checkBtn.classList.add("button", "is-fullwidth", "is-dark", "my-1", "check-full-cast", "is-loading");
     checkBtn.id = "check";
     checkBtn.textContent = "Check";
     modalContentEl.appendChild(checkBtn);
     // This button will allow the user to return to the search results to choose a different option
     var goBackBtn = document.createElement("button");
-    goBackBtn.classList.add("button", "is-fullwidth", "go-back");
+    goBackBtn.classList.add("button", "is-fullwidth", "is-dark", "my-1", "go-back");
     goBackBtn.textContent = "Go Back";
     modalContentEl.appendChild(goBackBtn);
 };
@@ -678,13 +678,13 @@ var displayChoiceActor = function () {
     modalContentEl.appendChild(choiceEl);
     // This will be a button to check that the current chosenActor was in the movie chosen by the user
     var checkBtn = document.createElement("button");
-    checkBtn.classList.add("button", "is-fullwidth", "check-full-cast");
+    checkBtn.classList.add("button", "is-fullwidth", "is-dark", "my-1", "check-full-cast");
     checkBtn.id = "check";
     checkBtn.textContent = "Check";
     modalContentEl.appendChild(checkBtn);
     // This button will allow the user to return to the search results to choose a different option
     var goBackBtn = document.createElement("button");
-    goBackBtn.classList.add("button", "is-fullwidth", "go-back");
+    goBackBtn.classList.add("button", "is-fullwidth", "is-dark", "my-1", "go-back");
     goBackBtn.textContent = "Go Back";
     modalContentEl.appendChild(goBackBtn);
 };
@@ -731,7 +731,7 @@ var correctChoiceHandler = function (arg) {
     modalContentEl.appendChild(userChoiceEl);
     // Creates a button to continue the game 
     var continueBtn = document.createElement("button");
-    continueBtn.classList.add("button", "is-fullwidth");
+    continueBtn.classList.add("button", "is-fullwidth", "is-dark", "my-1");
 
     // If "movie" was passed into the function, the added button will direct the user to the actor search 
     if (arg == "movie" && chosenActor.name !== kevinBacon.name) {
@@ -767,7 +767,7 @@ var incorrectChoiceHandler = function (arg) {
     modalContentEl.appendChild(userChoiceEl);
     // Creates a button to continue the game 
     var continueBtn = document.createElement("button");
-    continueBtn.classList.add("button", "is-fullwidth", "find-connection");
+    continueBtn.classList.add("button", "is-fullwidth", "is-dark", "my-1", "find-connection");
     // If "movie" was passed into the function, the added button will direct the user back to the movie search to try again
     if (arg == "movie") {
         continueBtn.textContent = "Find a Connecting Movie";
@@ -976,7 +976,7 @@ var victoryHandler = function () {
     modalContentEl.appendChild(victoryTextEl);
     // Creates a button that will allow the user to play again starting at a new actor
     var playAgainBtn = document.createElement("button");
-    playAgainBtn.classList.add("button", "is-fullwidth", "play-again")
+    playAgainBtn.classList.add("button", "is-fullwidth", "is-dark", "my-1", "play-again")
     playAgainBtn.textContent = "Play Again";
     modalContentEl.appendChild(playAgainBtn);
 };
