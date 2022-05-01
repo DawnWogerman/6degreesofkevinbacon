@@ -37,31 +37,39 @@
             </div>
         </nav>
         <header class="hero-body textblk is-size-1 is-text-weight-bold has-text-centered">
-            <div class="columns">
+            <div class="columns is-mobile">
                 <div class="column is-12">
-                    <h1 title>6 Degrees of<br> Kevin Bacon</h1>
+                    <h1>6 Degrees of<br> Kevin Bacon</h1>
+                </div>
+                <!--Empty column to try to fix formatting of the header-->
+                <div class="column is-12">
                 </div>
                 <div class="column is-12">
-
-                </div>
-                <div class="column is-12">
-                    <h1>How to Play</h1>
-                </div>
-                
+                </div> 
             </div>
-            
         </header>
     </section>
-       <div class="box-wrapper columns m-2">
-        <section class="column leftBox-wrapper is-one-quarter">
-
-            <div>
-                <h2 class="is-size-3">Search for a movie:</h2>
-
+    <section class="is-fullwidth textblk">
+        <div class="content howtoplay is-large">
+        <h1> How to Play</h1>
+        <div class="container">
+            <ol>
+            <li>Search for a movie the actor pictured is in.</li>
+            <li>Pick a movie from the list provided.</li>
+            <li>If correct, search for a connecting actor from the movie selected</li>
+            <li>Repeat the process until you reach a connection to Kevin Bacon</li>
+        </ol>
+        </div>
+        </div>
+    </section>
+       <div class= "columns">
+        <section class="column is-one-quarter">
+            <div class="control">
+                <!--<h2 class="is-size-3">Search for a movie:</h2>-->
+                <label class="label-form textblk center">Search a movie the actor below was in:</label>
                 <input class="input is-fullwidth my-1" type="text" id="movie-search" placeholder="Movie Search">
-                <button class="button is-fullwidth my-1" id="searchMovie">Search</button>
+                <button class="button is-fullwidth my-1 is-dark" id="searchMovie">Search</button>
             </div>
-
             <div class="leftSection">
                 <div class="fromActorImg actor-choice is-relative">
                     <figure class="image">
@@ -70,18 +78,16 @@
                     </figure>
                 </div>
             </div>
-
         </section>
-
-
         <section class="column middleBox is-half">
-
+            <div>
+                Testing 
+            
             <div class="middleSection">
-
                 <figure class="image">
                     <label class="label label-poster is-size-4 is-invisible" id="posterLabel" for="poster"></label>
                     <img id="poster" src="" alt="" name="poster" />
-                </figure>
+              </figure>
 
           <div>
             <p>Search History</p>
@@ -97,17 +103,15 @@
                   </div>
 
               </div>
+
             </div>
+        </div>   
         </section>
-
-
-
-        <section class="column rightBox-wrapper is-one-quarter">
-
-            <div>
-                <h2 class="is-size-3">Search for a connecting actor:</h2>
+        <section class="column is-one-quarter">
+            <div class="control">
+                <label class="label-form textblk center">Search for a connecting actor:</label>
                 <input class="input is-fullwidth my-1" type="text" id="actor-search" placeholder="Actor Search">
-                <button class="button is-fullwidth my-1" id="searchActor" disabled>Search</button>
+                <button class="button is-fullwidth my-1 is-dark" id="searchActor" disabled>Search</button>
             </div>
 
             <div class="rightSection">
@@ -118,7 +122,6 @@
                     </figure>
                 </div>
             </div>
-
         </section>
     </div>
     
@@ -128,7 +131,7 @@
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
-
+    
     <script src="./assets/js/script.js"></script>
 </body>
 

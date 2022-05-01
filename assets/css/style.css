@@ -1,6 +1,13 @@
 :root {
     --primary-color: #707070;  
+    --secondary-color: #4B4B4B;
 }
+
+body{
+    background-color: var(--primary-color);
+    font-family: 'Koulen', cursive;
+}
+
 .center, .center-column, .top, .right, .bottom, .left {
 	display: flex;
 	justify-content: center;
@@ -20,17 +27,14 @@
     line-height: 1;
 }
 
-@media (max-width: 1024px) {
-	.desktop {
-		display: none;
-	}
-}
 
 .hero {
    background-image: url("../images/kevinbacon-herobg.jpg");
    background-size: cover;
    background-position: center;
    opacity: 75%;
+   padding-bottom: 25px;
+   border-bottom: black 15px solid;
 }
 
 .textblk {
@@ -38,37 +42,58 @@
 }
 
 header {
-   z-index: 9999;
-   font-family: 'Koulen', cursive;
-}
-/*header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 30px;
+   z-index: 9999;  
 }
 
-.headerNav a {
-    font-size: 35px;
-    margin-right: 40px;
-} */
+nav a {
+    font-size: 24px;
+}
+
+.howtoplay {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.howtoplay ul {
+    display: inline-block;
+}
+
+.control {
+    margin: 20px;
+    border: 5px var(--secondary-color) solid;
+    
+}
+
+.label-form {
+    justify-content: center;
+}
 
 .actorImg{
     display: flex;
     justify-content: space-around;
+    
 }
 
-.actorImg img 
-{ 
+.actorImg img { 
     border-style: solid;
     border-color: black;
     border-radius: 50%;
     width: 150px;
     height:150px;
+    margin-left: 20px;
+    
 }
 
 .leftSection {
-position: relative;
+    position: relative;
+    margin-left: 20px;
+    border: 5px black solid;
+}
+
+.rightSection {
+    margin-right: 20px;
 }
 
 .actorNameSelect {
@@ -91,8 +116,13 @@ position: relative;
     padding: 10px;
 }
 
+
 .label-poster {
     top: 50%;
 }
 
-
+@media (max-width: 1024px) {
+	.desktop {
+		display: none;
+	}
+}
