@@ -24,13 +24,13 @@ Javascript is our main technology used, along with HTML and CSS. Bulma was used 
 https://dawnwogerman.github.io/6degreesofkevinbacon/
 ## Demo
 
-Insert gif or link to demo
-
+![demo](./assets/videos/6%20Degrees%20of%20Kevin%20Bacon.mp4)
+![modal](./assets/videos/modal.gif)
 
 ## Features
 
 Supports 1024px media queries(max width) written within the CSS documentation.
-![media query](./assets/videos/6%20Degrees%20of%20Kevin%20Bacon.gif)
+![media query](./assets/videos/Media-query.gif)
 
 ## Credits
 
