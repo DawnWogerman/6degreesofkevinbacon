@@ -24,13 +24,19 @@ Javascript is our main technology used, along with HTML and CSS. Bulma was used 
 https://dawnwogerman.github.io/6degreesofkevinbacon/
 ## Demo
 
-Insert gif or link to demo
-
+- Choose the game path
+![gamepath](./assets/videos/Gamepath.png)
+- Search for the movie name according to the actor shown
+![moviename](./assets/videos/moviename.gif)
+- Search for a connecting actor that performed in the same movie
+![actorname](./assets/videos/actorsname.gif)
+- Get search history and remove history in local Storage
+![modal](./assets/videos/modal.gif)
 
 ## Features
 
 Supports 1024px media queries(max width) written within the CSS documentation.
-
+![media query](./assets/videos/Media-query.gif)
 
 ## Credits
 
