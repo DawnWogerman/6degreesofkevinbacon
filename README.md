@@ -30,7 +30,7 @@ Insert gif or link to demo
 ## Features
 
 Supports 1024px media queries(max width) written within the CSS documentation.
-
+![media query](./assets/videos/6%20Degrees%20of%20Kevin%20Bacon.gif)
 
 ## Credits
 
