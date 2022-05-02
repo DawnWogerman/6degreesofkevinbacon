@@ -7,6 +7,7 @@ var posterEl = document.querySelector("#poster");
 var actorInputEl = document.querySelector("#actor-search");
 var posterLabelEl = document.querySelector("#posterLabel");
 var searchActorBtn = document.querySelector("#searchActor");
+var rightSectionEl = document.querySelector(".rightSection");
 var toActorEl = document.querySelector("#toActor");
 var toActorLabelEl = document.querySelector("#toActorLabel");
 var modalEl = document.querySelector(".modal");
@@ -14,6 +15,8 @@ var modalContentEl = document.querySelector(".modal-content");
 var modalCloseBtn = document.querySelector(".modal-close");
 var historyMovieBtn = document.querySelector("#searchMovieHistory");
 var historyActorBtn = document.querySelector("#searchActorHistory");
+var destinationActorBtn = document.querySelector("#destinationActor");
+var kevinBaconEl = document.querySelector("#kevinBacon");
 // END QUERY SELECTORS
 
 
@@ -65,6 +68,10 @@ var newGame = function () {
     searchMovieBtn.disabled = false;
     displayModal();
     gameChoice();
+    assignSavedActorNames();
+    assignSavedMovieNames();
+    autocompleteActorSource();
+    autocompleteMovieSource();
 };
 
 // Chooses a random actor from the saved array to start the game
@@ -89,6 +96,7 @@ var randomEndingActor = function () {
     // Randomly chooses an actor from the new array and assigns that actor to kevinBacon
     var randomArrPosition = Math.floor(Math.random() * possibleEndingActors.length);
     kevinBacon = possibleEndingActors[randomArrPosition];
+    kevinBaconEl.textContent = kevinBacon.name;
 };
 // End new game functions
 
@@ -177,6 +185,7 @@ var resetPoster = function () {
     posterLabelEl.classList.add("is-invisible");
     posterEl.setAttribute("src", "");
     posterEl.setAttribute("alt", "");
+    posterEl.classList.add("is-invisible");
 };
 
 // Checks if an object (the chosenActor object) is already saved in savedActorsArr
@@ -243,18 +252,18 @@ var assignSavedMovieNames = function () {
 };
 
 // Adds autocomplete to the movie search input based on the saved movie names
-$(function () {
+var autocompleteMovieSource = function () {
     $("#movie-search").autocomplete({
         source: savedMovieNames
     });
-});
+};
 
 // Adds autocomplete to the actor search input based on the saved actor names
-$(function () {
+var autocompleteActorSource = function () {
     $("#actor-search").autocomplete({
         source: savedActorNames
     });
-});
+};
 
 // Function for loading movie and actor search results
 var loadHistory = function () {
@@ -314,26 +323,43 @@ var createResultBtns = function (specialClass) {
     };
 };
 
+// Presents the user with gameplay options
 var gameChoice = function () {
     var promptEl = document.createElement("h3");
     promptEl.classList.add("is-size-2", "has-text-centered", "my-3");
     promptEl.textContent = "Which version would you like to play?";
     modalContentEl.appendChild(promptEl);
+    // A button for connecting to Kevin Bacon
     var classicEl = document.createElement("button");
     classicEl.classList.add("button", "is-fullwidth", "is-dark", "my-1", "classic");
     classicEl.textContent = "Classic - Connect to Kevin Bacon";
     modalContentEl.appendChild(classicEl);
+    // A button for connecting to a random actor
     var randomEl = document.createElement("button");
     randomEl.classList.add("button", "is-fullwidth", "is-dark", "my-1", "random");
     randomEl.textContent = "Random - Connect to a Random Actor";
     modalContentEl.appendChild(randomEl);
 };
 
+// Shows the actor the user should try to connect to
 var displayDestination = function () {
+    displayModal();
     var destinationEl = document.createElement("h3");
     destinationEl.classList.add("is-size-2", "has-text-centered", "my-3");
     destinationEl.textContent = "Your Destination Actor is " + kevinBacon.name;
     modalContentEl.appendChild(destinationEl);
+    // A portrait of the destination actor is displayed
+    var figureEl = document.createElement("figure");
+    figureEl.classList.add("image");
+    var imageEl = document.createElement("img");
+    imageEl.classList.add("mx-auto");
+    imageEl.style.maxHeight = "500px";
+    imageEl.style.width = "auto";
+    imageEl.setAttribute("src", kevinBacon.imgUrl);
+    imageEl.setAttribute("alt", kevinBacon.name + " portrait");
+    figureEl.appendChild(imageEl);
+    modalContentEl.appendChild(figureEl);
+    // A button for exiting the modal
     var gotItEl = document.createElement("button");
     gotItEl.classList.add("button", "is-fullwidth", "is-dark", "my-1", "got-it")
     gotItEl.textContent = "Got it!";
@@ -517,6 +543,7 @@ var movieChoice = function (id) {
 var displayChoiceMovie = function () {
     posterEl.setAttribute("src", chosenMovie.imgUrl);
     posterEl.setAttribute("alt", chosenMovie.name + " poster");
+    posterEl.classList.remove("is-invisible");
     // Gets and displays the movie's synopsis in the poster label
     getMovieSynopsis();
     clearModal();
@@ -879,6 +906,7 @@ var modalBtnHandler = function (event) {
             // Removes the movie poster and sets the fromActor image to the chosenActor's
             resetDisplay();
             resetPoster();
+            rightSectionEl.classList.add("is-invisible");
         }
         // Closes the modal again when the function is done
         closeModal();
@@ -891,6 +919,7 @@ var modalBtnHandler = function (event) {
         actorImg = event.target.dataset.url;
         // Runs the actorChoice function to set the chosenActor variable and display the actor's name and portrait
         actorChoice(actorID);
+        rightSectionEl.classList.remove("is-invisible");
     };
 
     // Go Back Button
@@ -919,6 +948,7 @@ var modalBtnHandler = function (event) {
         closeModal();
         // Resets the game with a new starting actor, and puts the movie search into focus
         newGame();
+        rightSectionEl.classList.add("is-invisible");
     }
 
     // Remove Button
@@ -941,6 +971,7 @@ var modalBtnHandler = function (event) {
     if (event.target.classList.contains("button") && event.target.classList.contains("classic")) {
         // Sets the destination actor in the kevinBacon variable (as the man himself in this case)
         kevinBacon = { imgUrl: "https://imdb-api.com/images/original/MV5BOTQxMTEyMjI0NV5BMl5BanBnXkFtZTgwODE4ODAzMjE@._V1_Ratio0.7273_AL_.jpg", name: "Kevin Bacon", id: "nm0000102", description: "(I) (Actor, Footloose (1984))" };
+        kevinBaconEl.textContent = kevinBacon.name;
         clearModal();
         // The destination actor is displayed
         displayDestination();
@@ -1011,7 +1042,7 @@ var displayActorSearched = function () {
 
     for (let i = 0; i < savedActorsArr.length; i++) {
         var actorSelected = document.createElement("li")
-        actorSelected.setAttribute("class", "m-1 is-flex is-justify-content-space-between")
+        actorSelected.setAttribute("class", "m-1 is-fullwidth is-justify-content-space-between")
         actorSelected.textContent = savedActorsArr[i].name + " " + savedActorsArr[i].description
         var removeActor = document.createElement("button")
         removeActor.textContent = "Remove"
@@ -1038,14 +1069,13 @@ searchMovieBtn.addEventListener("click", searchMovieBtnHandler);
 searchActorBtn.addEventListener("click", searchActorBtnHandler);
 modalCloseBtn.addEventListener("click", closeModal);
 modalContentEl.addEventListener("click", modalBtnHandler);
-historyMovieBtn.addEventListener("click",displayMovieSearchModal)
-historyActorBtn.addEventListener("click",displayActorSearchModal)
+historyMovieBtn.addEventListener("click", displayMovieSearchModal);
+historyActorBtn.addEventListener("click", displayActorSearchModal);
+destinationActorBtn.addEventListener("click", displayDestination);
 // END EVENT LISTENERS
 
 
 
 // BEGIN FUNCTIONS TO RUN ON LOAD
 newGame();
-assignSavedActorNames();
-assignSavedMovieNames();
 // END FUNCTIONS TO RUN ON LOAD
