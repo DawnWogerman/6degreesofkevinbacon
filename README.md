@@ -10,11 +10,11 @@ Javascript is our main technology used, along with HTML and CSS. Bulma was used 
 
 ## Table of Content
 
-1. [Link to the Application](#linktotheapplication)
+1. [Link to the Application](#link to the application)
 2. [Demo](#demo)
 3. [Features](#features)
 4. [Credits](#credits)
-5. [Future Development](#futuredevelopment)
+5. [Future Development](#future development)
 6. [Authors](#authors)
 7. [License](#license)
 
