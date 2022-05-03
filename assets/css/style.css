@@ -3,6 +3,10 @@
     --secondary-color: #4B4B4B;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 body{
     background-color: var(--primary-color);
     font-family: 'Koulen', cursive;
@@ -101,12 +105,14 @@ nav a {
 
 .leftSection {
     position: relative;
-    margin-left: 20px;
-    border: 5px black solid;
+    margin: 0 20px;
 }
 
 .rightSection {
-    margin-right: 20px;
+    margin: 0 20px;
+}
+
+.border-black {
     border: 5px black solid;
 }
 
@@ -138,7 +144,6 @@ nav a {
 #poster {
     max-height: 800px;
     max-width: 600px;
-    border: 5px black solid;
 }
 
 .label-poster {
