@@ -47,10 +47,10 @@
                     <h1>6 Degrees of<br> Kevin Bacon</h1>
                 </div>
                 <!--Empty column to try to fix formatting of the header-->
-                <div class="column is-12">
+                <!--<div class="column is-12">
                 </div>
                 <div class="column is-12">
-                </div> 
+                </div> -->
             </div>
         </header>
     </section>
@@ -63,7 +63,7 @@
             <li>Search for a movie the actor pictured is in.</li>
             <li>Pick a movie from the list provided.</li>
             <li>If correct, search for a connecting actor from the movie selected</li>
-            <li>Repeat the process until you reach a connection to Kevin Bacon</li>
+            <li>Repeat the process until you reach a connection to <span id="kevinBacon">Kevin Bacon</span></li>
         </ol>
         </div>
         </div>
@@ -80,7 +80,7 @@
                 <button class="button is-fullwidth my-1 is-dark" id="searchMovie">Search</button>
             </div>
             <!--Starting actor-->
-            <div class="leftSection">
+            <div class="leftSection border-black">
                 <div class="fromActorImg actor-choice is-relative">
                     <figure class="image">
                         <label class="label is-size-4" id="fromActorLabel" for="fromActor"></label>
@@ -106,13 +106,13 @@
                             <button class="button is-fullwidth is-dark" id="searchActorHistory">Actor</button>
                       </div>
                     </div> 
-             </div>
+                 </div>   
              <!--Start movie poster image-->
             <div class="middleSection center">
                 <figure class="image">
                     <!--Movie plot synopsis-->
                     <label class="label label-poster is-size-4 is-invisible" id="posterLabel" for="poster"></label>
-                    <img id="poster" src="" alt="" name="poster" />
+                    <img class="border-black is-invisible" id="poster" src="" alt="" name="poster" />
               </figure>
               <!--End movie poster image-->
         </section>
@@ -127,7 +127,7 @@
             </div>
             <!--End search form-->
             <!--Connecting actor image start-->
-            <div class="rightSection">
+            <div class="rightSection border-black is-invisible">
                 <div class="toActorImg actor-choice is-relative">
                     <figure class="image">
                         <label class="label is-size-4 is-invisible" id="toActorLabel" for="toActor"></label>
@@ -136,11 +136,15 @@
                 </div>
             </div>
             <!--End connecting actor image-->
+
+            <div class="rightSection">
+                <button class="button is-fullwidth is-dark my-1 buttonDestActor" id="destinationActor">Destination Actor</button>
+            </div>
         </section>
         <!--End right side column for connecting actor-->
     </div>
     <!--Start modal-->
-    <div class="modal">
+    <div class="modal is-clipped">
         <div class="modal-background"></div>
         <div class="modal-content has-background-white py-1">
         </div>
@@ -148,6 +152,9 @@
     </div>
 
     <!--End modal-->
+    <!--footer-->
+    <footer>Made by Group 3</footer>
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
