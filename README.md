@@ -14,9 +14,9 @@ Javascript is our main technology used, along with HTML and CSS. Bulma was used 
 2. [Demo](#demo)
 3. [Features](#features)
 4. [Credits](#credits)
-5. [Authors](#authors)
-6. [License](#license)
-7. [Future Development](#futuredevelopment)
+5. [Future Development](#futuredevelopment)
+6. [Authors](#authors)
+7. [License](#license)
 
 
 ## Link to the Application
@@ -47,6 +47,7 @@ APIs:
 
 - [IMDB](https://www.imdb.com/)
 - [OMDB](https://www.omdbapi.com/)
+
 ## Future Development
 
 1. Refactor the code
@@ -60,10 +61,9 @@ APIs:
 
 ## Authors
 
-- Wiilam Grout  [Github](https://github.com/wgrout87)   ||  [LinkedIn]()
-- Dawn Wogerman [Github](https://github.com/DawnWogerman)   ||  [LinkedIn]()
-- Shek Chun Lee [Github](https://github.com/leeshekchun)    ||  [LinkedIn](https://www.linkedin.com/in/shekchunlee/)
-
+- Wiilam Grout  [Github](https://github.com/wgrout87)
+- Dawn Wogerman [Github](https://github.com/DawnWogerman)
+- Shek Chun Lee [Github](https://github.com/leeshekchun)
 
 ## License
 
