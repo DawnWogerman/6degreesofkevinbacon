@@ -1042,7 +1042,7 @@ var displayActorSearched = function () {
 
     for (let i = 0; i < savedActorsArr.length; i++) {
         var actorSelected = document.createElement("li")
-        actorSelected.setAttribute("class", "m-1 is-fullwidth is-justify-content-space-between")
+        actorSelected.setAttribute("class", "m-1 is-fullwidth is-flex is-justify-content-space-between")
         actorSelected.textContent = savedActorsArr[i].name + " " + savedActorsArr[i].description
         var removeActor = document.createElement("button")
         removeActor.textContent = "Remove"
