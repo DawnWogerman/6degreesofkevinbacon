@@ -1,0 +1,168 @@
+:root {
+    --primary-color: #707070;  
+    --secondary-color: #4B4B4B;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body{
+    background-color: var(--primary-color);
+    font-family: 'Koulen', cursive;
+}
+
+/*flex and bulma positioning*/
+.center, .center-column, .top, .right, .bottom, .left {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.center-column {
+    flex-direction: column;
+}
+
+.top    { align-items:     flex-start; }
+.right  { justify-content: flex-end;   }
+.bottom { align-items:     flex-end;   }
+.left   { justify-content: flex-start; }
+
+.single-spaced, .single-spaced * {
+    line-height: 1;
+}
+
+/*Hero formatting */
+.hero {
+   background-image: url("../images/kevinbacon-herobg.jpg");
+   background-size: cover;
+   background-position: center;
+   opacity: 75%;
+   padding-bottom: 25px;
+   border-bottom: black 15px solid;
+}
+
+.textblk {
+    color:black;
+}
+
+/*header formatting*/
+header {
+   z-index: 9999;  
+}
+
+/*navigation formatting*/
+nav a {
+    font-size: 24px;
+}
+
+/*How to play formatting*/
+.howtoplay {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 15px black solid;
+    
+}
+
+.howtoplay ol {
+    display: inline-block;
+     
+}
+
+.howtoplay ol li {
+    text-align: left;
+}
+
+/*form control formatting*/
+.control {
+    margin: 20px;
+    border: 5px var(--secondary-color) solid;
+    
+}
+
+.label-form {
+    justify-content: center;
+}
+
+/*Start actor sections*/
+.actorImg{
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.actorImg img { 
+    border-style: solid;
+    border-color: black;
+    border-radius: 50%;
+    width: 150px;
+    height:150px;
+    margin-left: 20px;
+    
+}
+
+.leftSection {
+    position: relative;
+    margin: 0 20px;
+}
+
+.rightSection {
+    margin: 0 20px;
+}
+
+.border-black {
+    border: 5px black solid;
+}
+
+.actorNameSelect {
+    position: absolute;
+
+}
+
+.actorImgSelect {
+    position: absolute;
+}
+
+.label {   
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color:rgb(0,0,0,.8);
+    color: white !important;
+    padding: 10px;
+}
+
+.buttonDestActor {
+    margin-right: 20px;
+}
+
+/*Movie poster formatting*/
+#poster {
+    max-height: 800px;
+    max-width: 600px;
+}
+
+.label-poster {
+    top: 50%;
+}
+
+/*History section formatting*/
+.history {
+    padding: 5px;
+}
+
+.historybtn {
+    width: 100% !important; 
+    padding: 5px;
+}
+
+/*Media Query*/
+@media (max-width: 1024px) {
+	.desktop {
+		display: none;
+	}
+}
