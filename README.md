@@ -25,7 +25,6 @@ Javascript is our main technology used, along with HTML and CSS. Bulma was used 
 ## Demo
 
 - Choose the game path
-![gamepath](./assets/videos/Gamepath.png)
 - Search for the movie name according to the actor shown
 ![moviename](./assets/videos/moviename.gif)
 - Search for a connecting actor that performed in the same movie
