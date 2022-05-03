@@ -19,7 +19,7 @@ Javascript is our main technology used, along with HTML and CSS. Bulma was used 
 7. [License](#license)
 
 
-## Link to the Application
+## Link-to-the-Application
 
 https://dawnwogerman.github.io/6degreesofkevinbacon/
 ## Demo
@@ -48,7 +48,7 @@ APIs:
 - [IMDB](https://www.imdb.com/)
 - [OMDB](https://www.omdbapi.com/)
 
-## Future Development
+## Future-Development
 
 1. Refactor the code
 2. Degree count for each actor used
