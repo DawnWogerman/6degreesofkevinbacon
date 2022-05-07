@@ -78,7 +78,9 @@ var newGame = function () {
 var randomStartingActor = function () {
     // Creates a new array without Kevin Bacon
     var possibleStartingActors = savedActorsArr.filter(function (actor) {
-        return actor.name != kevinBacon.name;
+        if (actor.name !== kevinBacon.name && actor.name != "Kevin Bacon") {
+            return actor.name;
+        }
     });
     // Randomly chooses an actor from the new array and assigns that actor to chosenActor
     var randomArrPosition = Math.floor(Math.random() * possibleStartingActors.length);
@@ -89,7 +91,7 @@ var randomStartingActor = function () {
 var randomEndingActor = function () {
     // Creates a new array without Kevin Bacon or the starting actor
     var possibleEndingActors = savedActorsArr.filter(function (actor) {
-        if (actor.name != chosenActor.name && actor.name != "Kevin Bacon") {
+        if (actor.name !== chosenActor.name && actor.name != "Kevin Bacon") {
             return actor.name;
         }
     });
@@ -271,9 +273,9 @@ var loadHistory = function () {
     if (JSON.parse(localStorage.getItem("Movies")) !== null) {
         savedMoviesArr = JSON.parse(localStorage.getItem("Movies"));
     };
-    if (JSON.parse(localStorage.getItem("Actors")) !== null) {
+    if (JSON.parse(localStorage.getItem("Actors")) !== null && JSON.parse(localStorage.getItem("Actors")).length > 0) {
         savedActorsArr = JSON.parse(localStorage.getItem("Actors"));
-    }
+    };
 };
 // End Utility Functions
 
@@ -382,10 +384,8 @@ var searchActor = function (name) {
                 response.json()
                     // Runs an anonymous function to handle the fetched data
                     .then(function (data) {
-                        console.log(data);
                         // Checks for an errorMessage and displays if there is one
                         if (data.errorMessage) {
-                            console.log(data.errorMessage);
                             okResponseProblemDisplay(data);
                         }
 
@@ -402,7 +402,6 @@ var searchActor = function (name) {
                                 resultsArr.push(actorResultObj);
 
                             };
-                            console.log(resultsArr);
                             // Displays the modal with its content emptied
                             displayModal();
                             // Displays the actors that returned from the search as button choices
@@ -432,7 +431,6 @@ var actorChoice = function (id) {
         if (resultsArr[i].id === id) {
             // Saves the object with the actor's information
             chosenActor = resultsArr[i];
-            console.log(chosenActor);
         };
     };
     // Checks if savedActorsArr is not null
@@ -467,10 +465,8 @@ var searchMovie = function (movie) {
                 response.json()
                     // Runs an anonymous function to handle the fetched data
                     .then(function (data) {
-                        console.log(data);
                         // Checks if there was an error message in the data
                         if (data.errorMessage) {
-                            console.log(data.errorMessage);
                             okResponseProblemDisplay(data);
                         }
 
@@ -487,7 +483,6 @@ var searchMovie = function (movie) {
                                 resultsArr.push(movieResultObj);
 
                             };
-                            console.log(resultsArr);
                             // Displays the modal with its content emptied
                             displayModal();
                             // Shows the results of the search with buttons for any options
@@ -609,8 +604,10 @@ var getFullCast = function (movieID) {
                         if (data.errorMessage == "") {
                             // Sets the returned cast data to the fullCast variable
                             fullCast = data.actors;
-                            // Removes the loading indicator from the "check" button once the full cast has been retrieved
-                            document.getElementById("check").classList.remove("is-loading");
+                            if (document.getElementById("check")) {
+                                // Removes the loading indicator from the "check" button once the full cast has been retrieved
+                                document.getElementById("check").classList.remove("is-loading");
+                            }
                             // Removes the loading indicator from the searchMovieBtn after the fetch is complete
                             searchMovieBtn.classList.remove("is-loading");
                         }
@@ -723,7 +720,6 @@ var reuseSavedDataActor = function (name) {
         // Returns it as a result in the resultsArr if it has
         if (savedActorsArr[i].name == name) {
             resultsArr.push(savedActorsArr[i]);
-            console.log("The actor is saved in the array");
         };
     };
 };
@@ -735,7 +731,6 @@ var reuseSavedDataMovie = function (name) {
         // Returns it as a result in the resultsArr if it has
         if (savedMoviesArr[i].name == name) {
             resultsArr.push(savedMoviesArr[i]);
-            console.log("The movie is saved in the array");
         };
     };
 };
@@ -961,10 +956,10 @@ var modalBtnHandler = function (event) {
                 savedActorsArr.splice(i, 1);
             };
         };
-        // The modal content is adjusted to display without the removed entry
-        displayActorSearchModal();
         // The altered savedActorsArr is saved
         saveHistory();
+        // The modal content is adjusted to display without the removed entry
+        displayActorSearchModal();
     }
 
     // Classic version button
@@ -975,7 +970,6 @@ var modalBtnHandler = function (event) {
         clearModal();
         // The destination actor is displayed
         displayDestination();
-        console.log(kevinBacon.name);
     };
 
     // Random version button
@@ -985,7 +979,6 @@ var modalBtnHandler = function (event) {
         randomEndingActor();
         // The destination actor is displayed
         displayDestination();
-        console.log(kevinBacon.name);
     };
 
     if (event.target.classList.contains("button") && event.target.classList.contains("got-it")) {
@@ -1023,7 +1016,6 @@ var displayMovieSearched = function () {
 
     for (let i = 0; i < savedMoviesArr.length; i++) {
         var movieSelected = document.createElement("li")
-        console.log(savedMoviesArr[0])
         movieSelected.textContent = savedMoviesArr[i].name + " " + savedMoviesArr[i].description
         movieHistorylist.appendChild(movieSelected)
     }
@@ -1042,7 +1034,7 @@ var displayActorSearched = function () {
 
     for (let i = 0; i < savedActorsArr.length; i++) {
         var actorSelected = document.createElement("li")
-        actorSelected.setAttribute("class", "m-1 is-fullwidth is-justify-content-space-between")
+        actorSelected.setAttribute("class", "m-1 is-fullwidth is-flex is-justify-content-space-between")
         actorSelected.textContent = savedActorsArr[i].name + " " + savedActorsArr[i].description
         var removeActor = document.createElement("button")
         removeActor.textContent = "Remove"
