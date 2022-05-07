@@ -47,10 +47,10 @@
                     <h1>6 Degrees of<br> Kevin Bacon</h1>
                 </div>
                 <!--Empty column to try to fix formatting of the header-->
-                <div class="column is-12">
+                <!--<div class="column is-12">
                 </div>
                 <div class="column is-12">
-                </div> 
+                </div> -->
             </div>
         </header>
     </section>
@@ -80,7 +80,7 @@
                 <button class="button is-fullwidth my-1 is-dark" id="searchMovie">Search</button>
             </div>
             <!--Starting actor-->
-            <div class="leftSection">
+            <div class="leftSection border-black">
                 <div class="fromActorImg actor-choice is-relative">
                     <figure class="image">
                         <label class="label is-size-4" id="fromActorLabel" for="fromActor"></label>
@@ -112,7 +112,7 @@
                 <figure class="image">
                     <!--Movie plot synopsis-->
                     <label class="label label-poster is-size-4 is-invisible" id="posterLabel" for="poster"></label>
-                    <img id="poster" src="" alt="" name="poster" />
+                    <img class="border-black is-invisible" id="poster" src="" alt="" name="poster" />
               </figure>
               <!--End movie poster image-->
         </section>
@@ -127,7 +127,7 @@
             </div>
             <!--End search form-->
             <!--Connecting actor image start-->
-            <div class="rightSection">
+            <div class="rightSection border-black is-invisible">
                 <div class="toActorImg actor-choice is-relative">
                     <figure class="image">
                         <label class="label is-size-4 is-invisible" id="toActorLabel" for="toActor"></label>
@@ -136,14 +136,15 @@
                 </div>
             </div>
             <!--End connecting actor image-->
-            <div>
+
+            <div class="rightSection">
                 <button class="button is-fullwidth is-dark my-1 buttonDestActor" id="destinationActor">Destination Actor</button>
             </div>
         </section>
         <!--End right side column for connecting actor-->
     </div>
     <!--Start modal-->
-    <div class="modal">
+    <div class="modal is-clipped">
         <div class="modal-background"></div>
         <div class="modal-content has-background-white py-1">
         </div>
