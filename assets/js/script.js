@@ -22,14 +22,23 @@ var kevinBaconEl = document.querySelector("#kevinBacon");
 
 
 // BEGIN GLOBAL VARIABLES
-var apiKeysArr = ["k_ch8rhqcw", "k_uf9wr72x", "k_r6e2bkjn"];
+var apiKeysArr = ["0a247f3cf097eb7926fb04f3acf17a64", "0a247f3cf097eb7926fb04f3acf17a64", "0a247f3cf097eb7926fb04f3acf17a64"];
 var apiKeyTracker = 0;
 var apiKey = apiKeysArr[apiKeyTracker];
 var currentActorObj = {};
 var currentMovieObj = {};
 var resultsArr = [];
 // Starting array of actors. This array will be built up any time the user uses a new actor not already represented in the array
-var savedActorsArr = [{ imgUrl: "https://imdb-api.com/images/original/MV5BMTQyMTExNTMxOF5BMl5BanBnXkFtZTcwNDg1NzkzNw@@._V1_Ratio0.7273_AL_.jpg", name: "Russell Crowe", id: "nm0000128", description: "(Actor, Les Misérables (2012))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMjQ2NTM4MzI4M15BMl5BanBnXkFtZTcwOTkxMjcxNA@@._V1_Ratio0.7273_AL_.jpg", name: "Djimon Hounsou", id: "nm0005023", description: "(Actor, Blood Diamond (2006))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTU5NjEwOTgwMF5BMl5BanBnXkFtZTgwOTEzMDk1NTM@._V1_Ratio0.7273_AL_.jpg", name: "Zachary Levi", id: "nm1157048", description: "(Actor, Shazam! (2019))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BNzEzMTI2NjEyNF5BMl5BanBnXkFtZTcwNTA0OTE4OA@@._V1_Ratio0.7273_AL_.jpg", name: "Idris Elba", id: "nm0252961", description: "(Actor, Beasts of No Nation (2015))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTk0NjM2MTE5M15BMl5BanBnXkFtZTcwODIxMzcyNw@@._V1_Ratio0.7273_AL_.jpg", name: "Michael Fassbender", id: "nm1055413", description: "(I) (Actor, Shame (2011))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BOTU3NDE5MDQ4MV5BMl5BanBnXkFtZTgwMzE5ODQ3MDI@._V1_Ratio0.7273_AL_.jpg", name: "Jennifer Lawrence", id: "nm2225369", description: "(III) (Actress, The Hunger Games (2012))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTY1ODkwMTQxOF5BMl5BanBnXkFtZTcwNzkwNDcyMw@@._V1_Ratio0.7273_AL_.jpg", name: "Kevin Costner", id: "nm0000126", description: "(Actor, The Postman (1997))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTk1MjM3NTU5M15BMl5BanBnXkFtZTcwMTMyMjAyMg@@._V1_Ratio0.7727_AL_.jpg", name: "Tom Cruise", id: "nm0000129", description: "(Actor, Top Gun (1986))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTg2NTk2MTgxMV5BMl5BanBnXkFtZTgwNjcxMjAzMTI@._V1_Ratio0.7273_AL_.jpg", name: "Amy Adams", id: "nm0010736", description: "(III) (Actress, Arrival (2016))" }, { imgUrl: "https://imdb-api.com/images/original/MV5BMTRhNzQ3NGMtZmQ1Mi00ZTViLTk3OTgtOTk0YzE2YTgwMmFjXkEyXkFqcGdeQXVyNzg5MzIyOA@@._V1_Ratio0.7727_AL_.jpg", name: "Anne Hathaway", id: "nm0004266", description: "(Actress, Les Misérables (2012))" }];
+var savedActorsArr = [
+    { imgUrl: "https://image.tmdb.org/t/p/w500/cqMiQtOrdBC82oPCHIZcMNUI80C.jpg", name: "Russell Crowe", id: "934", description: "(Actor, Les Misérables (2012))" }, { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Djimon Hounsou", id: "938", description: "(Actor, Blood Diamond (2006))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/1W8L3kEMMPF9umT3ZGaNIiCYKfZ.jpg", name: "Zachary Levi", id: "69899", description: "(Actor, Shazam! (2019))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/1W8L3kEMMPF9umT3ZGaNIiCYKfZ.jpg", name: "Idris Elba", id: "nm0252961", description: "(Actor, Beasts of No Nation (2015))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Michael Fassbender", id: "nm1055413", description: "(I) (Actor, Shame (2011))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Jennifer Lawrence", id: "nm2225369", description: "(III) (Actress, The Hunger Games (2012))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Kevin Costner", id: "nm0000126", description: "(Actor, The Postman (1997))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Tom Cruise", id: "nm0000129", description: "(Actor, Top Gun (1986))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Amy Adams", id: "nm0010736", description: "(III) (Actress, Arrival (2016))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Anne Hathaway", id: "nm0004266", description: "(Actress, Les Misérables (2012))" }];
 // Set Kevin Bacon's information to a variable so that a non-classic version of the game can be created where Kevin Bacon is not the destination actor
 var kevinBacon = { imgUrl: "https://imdb-api.com/images/original/MV5BOTQxMTEyMjI0NV5BMl5BanBnXkFtZTgwODE4ODAzMjE@._V1_Ratio0.7273_AL_.jpg", name: "Kevin Bacon", id: "nm0000102", description: "(I) (Actor, Footloose (1984))" };
 var savedMoviesArr = [];

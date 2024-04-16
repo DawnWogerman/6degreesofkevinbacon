@@ -1,10 +1,8 @@
 # 6 Degrees of Kevin Bacon
 
+## Description
 
-
-##  Description
-
-As a Cinephile, also called “movie lover”, I want to be presented with a random actor, so that I can then connect that actor to another based on a movie both have performed in, continuing that process with each consecutive actor until I have a chain of connections leading to Kevin Bacon. 
+As a Cinephile, also called “movie lover”, I want to be presented with a random actor, so that I can then connect that actor to another based on a movie both have performed in, continuing that process with each consecutive actor until I have a chain of connections leading to Kevin Bacon.
 
 Javascript is our main technology used, along with HTML and CSS. Bulma was used for adding styles to the page. Foundation modals were generated within Javascript adding styling with Bulma. Learning a new CSS framework and merging conflicts the first time were the biggest challenge we faced, and we overcame by reading more documents and testing on the website to get the CSS style works as well as communicating throughout the whole project solved the merge conflicts efficiently.
 
@@ -18,19 +16,19 @@ Javascript is our main technology used, along with HTML and CSS. Bulma was used 
 6. [Authors](#authors)
 7. [License](#license)
 
-
 ## Link
 
 [Link to the application](https://dawnwogerman.github.io/6degreesofkevinbacon/)
+
 ## Demo
 
 - Choose the game path
 - Search for the movie name according to the actor shown
-![moviename](./assets/videos/moviename.gif)
+  ![moviename](./assets/videos/moviename.gif)
 - Search for a connecting actor that performed in the same movie
-![actorname](./assets/videos/actorsname.gif)
+  ![actorname](./assets/videos/actorsname.gif)
 - Get search history and remove history in local Storage
-![modal](./assets/videos/modal.gif)
+  ![modal](./assets/videos/modal.gif)
 
 ## Features
 
@@ -39,12 +37,13 @@ Supports 1024px media queries(max width) written within the CSS documentation.
 
 ## Credits
 
-Third Party Libraries: 
+Third Party Libraries:
+
 - [Bulma](https://bulma.io/)
 
 APIs:
 
-- [IMDB](https://www.imdb.com/)
+- [TMDB](https://www.themoviedb.org/)
 - [OMDB](https://www.omdbapi.com/)
 
 ## FutureDevelopment
@@ -60,7 +59,7 @@ APIs:
 
 ## Authors
 
-- Wiilam Grout  [Github](https://github.com/wgrout87)
+- Wiilam Grout [Github](https://github.com/wgrout87)
 - Dawn Wogerman [Github](https://github.com/DawnWogerman)
 - Shek Chun Lee [Github](https://github.com/leeshekchun)
 
@@ -85,4 +84,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
