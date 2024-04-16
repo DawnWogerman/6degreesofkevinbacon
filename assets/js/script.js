@@ -470,10 +470,17 @@ var actorChoice = function (id) {
     displayChoiceActor();
 };
 
-// Searches for a movie using the IMDb API. Only use this after we're done with the searchActor() and actorChoice() functions
+// Searches for a movie using the TMDb API. Only use this after we're done with the searchActor() and actorChoice() functions
 var searchMovie = function (movie) {
-    // Creates the url by inserting one of the API keys and the movie title that was passed into the function
-    fetch("https://imdb-api.com/en/API/SearchMovie/" + apiKey + "/" + movie)
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYTI0N2YzY2YwOTdlYjc5MjZmYjA0ZjNhY2YxN2E2NCIsInN1YiI6IjY2MWRkNmM2ZWNhZWY1MDE3Y2Y4OTkxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Nz5rGKTtQfwMBC2bfSEzNlJQeC6U_I3wFtagD75ilvE'
+        }
+    };
+
+    fetch(`https://api.themoviedb.org/3/search/movie?query=${movie.replace(" ", "%20")}&include_adult=false&language=en-US&page=1`, options)
         // Runs an anonymous function on the response
         .then(function (response) {
             // Checks if the response was okay
@@ -609,7 +616,15 @@ var getMovieSynopsis = function () {
 // Gets the full cast of a movie and saves it in an array for comparison
 var getFullCast = function (movieID) {
     // Creates the url by inserting one of the API keys and the movie ID that was passed into the function
-    fetch("https://imdb-api.com/en/API/FullCast/" + apiKey + "/" + movieID)
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYTI0N2YzY2YwOTdlYjc5MjZmYjA0ZjNhY2YxN2E2NCIsInN1YiI6IjY2MWRkNmM2ZWNhZWY1MDE3Y2Y4OTkxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Nz5rGKTtQfwMBC2bfSEzNlJQeC6U_I3wFtagD75ilvE'
+        }
+    };
+
+    fetch(`https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`, options)
         // Runs an anonymous function on the response
         .then(function (response) {
             // Checks if the response was okay
@@ -982,7 +997,7 @@ var modalBtnHandler = function (event) {
     // Classic version button
     if (event.target.classList.contains("button") && event.target.classList.contains("classic")) {
         // Sets the destination actor in the kevinBacon variable (as the man himself in this case)
-        kevinBacon = { imgUrl: "https://imdb-api.com/images/original/MV5BOTQxMTEyMjI0NV5BMl5BanBnXkFtZTgwODE4ODAzMjE@._V1_Ratio0.7273_AL_.jpg", name: "Kevin Bacon", id: "nm0000102", description: "(I) (Actor, Footloose (1984))" };
+        kevinBacon = { imgUrl: "https://image.tmdb.org/t/p/w500/rjX2Oz3tCZMfSwOoIAyEhdtXnTE.jpg", name: "Kevin Bacon", id: "4724", description: "(I) (Actor, Footloose (1984))" };
         kevinBaconEl.textContent = kevinBacon.name;
         clearModal();
         // The destination actor is displayed
