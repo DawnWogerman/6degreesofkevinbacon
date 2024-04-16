@@ -32,15 +32,15 @@ var resultsArr = [];
 var savedActorsArr = [
     { imgUrl: "https://image.tmdb.org/t/p/w500/cqMiQtOrdBC82oPCHIZcMNUI80C.jpg", name: "Russell Crowe", id: "934", description: "(Actor, Les Misérables (2012))" }, { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Djimon Hounsou", id: "938", description: "(Actor, Blood Diamond (2006))" },
     { imgUrl: "https://image.tmdb.org/t/p/w500/1W8L3kEMMPF9umT3ZGaNIiCYKfZ.jpg", name: "Zachary Levi", id: "69899", description: "(Actor, Shazam! (2019))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/1W8L3kEMMPF9umT3ZGaNIiCYKfZ.jpg", name: "Idris Elba", id: "nm0252961", description: "(Actor, Beasts of No Nation (2015))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Michael Fassbender", id: "nm1055413", description: "(I) (Actor, Shame (2011))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Jennifer Lawrence", id: "nm2225369", description: "(III) (Actress, The Hunger Games (2012))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Kevin Costner", id: "nm0000126", description: "(Actor, The Postman (1997))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Tom Cruise", id: "nm0000129", description: "(Actor, Top Gun (1986))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Amy Adams", id: "nm0010736", description: "(III) (Actress, Arrival (2016))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Anne Hathaway", id: "nm0004266", description: "(Actress, Les Misérables (2012))" }];
+    { imgUrl: "https://image.tmdb.org/t/p/w500/be1bVF7qGX91a6c5WeRPs5pKXln.jpg", name: "Idris Elba", id: "17605", description: "(Actor, Beasts of No Nation (2015))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/xvbnUiB2ZBR3QIt595OzNy657Vw.jpg", name: "Michael Fassbender", id: "17288", description: "(I) (Actor, Shame (2011))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/9AXsaKZPlQKjF32IC6oQavyaXiS.jpg", name: "Jennifer Lawrence", id: "72129", description: "(III) (Actress, The Hunger Games (2012))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/bykmxJHLfbFM3NT05RZXhx8YTzF.jpg", name: "Kevin Costner", id: "1269", description: "(Actor, The Postman (1997))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/eOh4ubpOm2Igdg0QH2ghj0mFtC.jpg", name: "Tom Cruise", id: "500", description: "(Actor, Top Gun (1986))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/ify7UiQkVMQ0uCUX0F0AuzLK1vS.jpg", name: "Amy Adams", id: "9273", description: "(III) (Actress, Arrival (2016))" },
+    { imgUrl: "https://image.tmdb.org/t/p/w500/qyigJ4qyrxZdVwz89uZwQaTvXX8.jpg", name: "Anne Hathaway", id: "1813", description: "(Actress, Les Misérables (2012))" }];
 // Set Kevin Bacon's information to a variable so that a non-classic version of the game can be created where Kevin Bacon is not the destination actor
-var kevinBacon = { imgUrl: "https://imdb-api.com/images/original/MV5BOTQxMTEyMjI0NV5BMl5BanBnXkFtZTgwODE4ODAzMjE@._V1_Ratio0.7273_AL_.jpg", name: "Kevin Bacon", id: "nm0000102", description: "(I) (Actor, Footloose (1984))" };
+var kevinBacon = { imgUrl: "https://image.tmdb.org/t/p/w500/rjX2Oz3tCZMfSwOoIAyEhdtXnTE.jpg", name: "Kevin Bacon", id: "4724", description: "(I) (Actor, Footloose (1984))" };
 var savedMoviesArr = [];
 var savedActorNames = [];
 var savedMovieNames = [];
@@ -169,10 +169,10 @@ var searchProblemDisplay = function () {
 var catchDisplay = function () {
     // Displays the modal with its content emptied
     displayModal();
-    // Dynamically creates content for the modal to let the user know there was a problem connecting to IMDb
+    // Dynamically creates content for the modal to let the user know there was a problem connecting to TMDb
     var errorMessageEl = document.createElement("h3");
     errorMessageEl.classList.add("is-size-2", "has-text-centered", "my-3");
-    errorMessageEl.textContent = "There was a problem connecting with IMDb";
+    errorMessageEl.textContent = "There was a problem connecting with TMDb";
     modalContentEl.appendChild(errorMessageEl);
 };
 
@@ -320,7 +320,7 @@ var closeModal = function () {
     actorSearchPressed = false;
 };
 
-// Displays the results from either the actor or movie searches that the IMDb API returns
+// Displays the results from either the actor or movie searches that the TMDb API returns
 var createResultBtns = function (specialClass) {
     // Loops through the results creating buttons for each
     for (i = 0; i < resultsArr.length; i++) {
@@ -381,10 +381,18 @@ var displayDestination = function () {
 
 
 // Begin user input functions
-// Searches for an actor using the IMDb API. Only use this after we're done with the searchmovie() and movieChoice() functions
+// Searches for an actor using the TMDb API. Only use this after we're done with the searchmovie() and movieChoice() functions
 var searchActor = function (name) {
     // Creates the url by inserting one of the API keys and the name that was passed into the function
-    fetch("https://imdb-api.com/en/API/SearchName/" + apiKey + "/" + name)
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYTI0N2YzY2YwOTdlYjc5MjZmYjA0ZjNhY2YxN2E2NCIsInN1YiI6IjY2MWRkNmM2ZWNhZWY1MDE3Y2Y4OTkxNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Nz5rGKTtQfwMBC2bfSEzNlJQeC6U_I3wFtagD75ilvE'
+        }
+    };
+
+    fetch(`https://api.themoviedb.org/3/search/person?query=${name.replace(" ", "%20")}&include_adult=false&language=en-US&page=1`, options)
         // Runs an anonymous function on the response
         .then(function (response) {
             // Checks if the response was okay
