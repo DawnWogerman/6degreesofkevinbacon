@@ -1,4 +1,5 @@
-import { savedActorsArr } from "./savedActorsArr.js";
+import { defaultActorsArr } from "./defaultActorsArr.js";
+var savedActorsArr = [...defaultActorsArr];
 
 // BEGIN QUERY SELECTORS
 var movieInputEl = document.querySelector("#movie-search");
@@ -233,7 +234,8 @@ var assignSavedActorNames = function () {
 var assignSavedMovieNames = function () {
     // Resets savedMovieNames so that duplicates don't appear in the array every time the function is called
     savedMovieNames = [];
-    for (let i = 0; i < savedMoviesArr.length; i++) {
+    const savedMoviesArrFiltered = savedMoviesArr.filter(element => element);
+    for (let i = 0; i < savedMoviesArrFiltered.length; i++) {
         savedMovieNames.push(savedMoviesArr[i].name);
     };
 };
@@ -472,9 +474,9 @@ var searchMovie = function (movie) {
                             // Loops through the results from the movie search and assigns the important information to the properties of an object
                             for (let i = 0; i < data.results.length; i++) {
                                 var movieResultObj = {
-                                    description: data.results[i].description,
+                                    description: data.results[i].overview,
                                     id: data.results[i].id,
-                                    imgUrl: data.results[i].image,
+                                    imgUrl: data.results[i].poster_path,
                                     name: data.results[i].title
                                 };
                                 // Adds the newly created object into the resultsArr array (this is the same array that receives the actor search results, so this function should only be used after we're done with the actor results)
@@ -508,6 +510,7 @@ var movieChoice = function (id) {
         if (resultsArr[i].id === id) {
             // Saves the object with the movie's information
             chosenMovie = resultsArr[i];
+            console.log(chosenMovie);
         };
     };
     // Checks if savedMoviesArr is not null

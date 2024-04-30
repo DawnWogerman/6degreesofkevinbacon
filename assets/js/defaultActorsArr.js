@@ -1,4 +1,4 @@
-export var savedActorsArr = [
+export var defaultActorsArr = [
     { imgUrl: "https://image.tmdb.org/t/p/w500/cqMiQtOrdBC82oPCHIZcMNUI80C.jpg", name: "Russell Crowe", id: "934", description: "(Actor, Les Misérables (2012))" },
     { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Djimon Hounsou", id: "938", description: "(Actor, Blood Diamond (2006))" },
     { imgUrl: "https://image.tmdb.org/t/p/w500/1W8L3kEMMPF9umT3ZGaNIiCYKfZ.jpg", name: "Zachary Levi", id: "69899", description: "(Actor, Shazam! (2019))" },
