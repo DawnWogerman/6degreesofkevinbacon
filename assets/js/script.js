@@ -196,12 +196,13 @@ var checkSavedActorsArr = function (obj) {
 
 // Checks if an object (the chosenMovie object) is already saved in savedMoviesArr
 var checkSavedMoviesArr = function (obj) {
+    const savedMoviesArrFiltered = savedMoviesArr.filter(element => element);
     // Checks that savedMoivesArr actually has anything in it
-    if (savedMoviesArr !== null) {
-        // Loops through each object in the savedMoviesArr array
-        for (let i = 0; i < savedMoviesArr.length; i++) {
+    if (savedMoviesArrFiltered !== null) {
+        // Loops through each object in the savedMoviesArrFiltered array
+        for (let i = 0; i < savedMoviesArrFiltered.length; i++) {
             // Checks if the ID's match
-            if (savedMoviesArr[i].id === obj.id) {
+            if (savedMoviesArrFiltered[i].id === obj.id) {
                 // Returns true, ending the function, if it finds a match
                 return true;
             }
@@ -236,7 +237,7 @@ var assignSavedMovieNames = function () {
     savedMovieNames = [];
     const savedMoviesArrFiltered = savedMoviesArr.filter(element => element);
     for (let i = 0; i < savedMoviesArrFiltered.length; i++) {
-        savedMovieNames.push(savedMoviesArr[i].name);
+        savedMovieNames.push(savedMoviesArrFiltered[i].name);
     };
 };
 
@@ -476,7 +477,7 @@ var searchMovie = function (movie) {
                                 var movieResultObj = {
                                     description: data.results[i].overview,
                                     id: data.results[i].id,
-                                    imgUrl: data.results[i].poster_path,
+                                    imgUrl: `https://image.tmdb.org/t/p/original/${data.results[i].poster_path}`,
                                     name: data.results[i].title
                                 };
                                 // Adds the newly created object into the resultsArr array (this is the same array that receives the actor search results, so this function should only be used after we're done with the actor results)
@@ -510,7 +511,6 @@ var movieChoice = function (id) {
         if (resultsArr[i].id === id) {
             // Saves the object with the movie's information
             chosenMovie = resultsArr[i];
-            console.log(chosenMovie);
         };
     };
     // Checks if savedMoviesArr is not null
@@ -608,7 +608,8 @@ var getFullCast = function (movieID) {
                 response.json()
                     // Runs an anonymous function to handle the fetched data
                     .then(function (data) {
-                        if (data.errorMessage == "") {
+                        console.log(data);
+                        if (!data.errorMessage) {
                             // Sets the returned cast data to the fullCast variable
                             fullCast = data.actors;
                             if (document.getElementById("check")) {
@@ -731,11 +732,12 @@ var reuseSavedDataActor = function (name) {
 
 // Function for reusing saved information to decrease API fetches
 var reuseSavedDataMovie = function (name) {
+    const savedMoviesArrFiltered = savedMoviesArr.filter(element => element);
     // Checks all of the saved actors' information to see if it has been saved
-    for (let i = 0; i < savedMoviesArr.length; i++) {
+    for (let i = 0; i < savedMoviesArrFiltered.length; i++) {
         // Returns it as a result in the resultsArr if it has
-        if (savedMoviesArr[i].name == name) {
-            resultsArr.push(savedMoviesArr[i]);
+        if (savedMoviesArrFiltered[i].name == name) {
+            resultsArr.push(savedMoviesArrFiltered[i]);
         };
     };
 };
@@ -870,7 +872,7 @@ var modalBtnHandler = function (event) {
     // Movie Results Buttons
     if (event.target.classList.contains("button") && event.target.classList.contains("movie")) {
         // Retrieves the id and url information that was stored into the button HTML
-        movieID = event.target.dataset.id;
+        movieID = parseInt(event.target.dataset.id);
         posterUrl = event.target.dataset.url;
         // Runs the movieChoice function to display the poster and short plot synopsis
         movieChoice(movieID);
