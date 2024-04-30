@@ -105,21 +105,6 @@ var randomEndingActor = function () {
 
 
 // Begin Utility Functions
-// Function for cycling through the available API keys
-var apiKeyCycler = function () {
-    // Increments the apiKeyTracker variable after the first two positions
-    if (apiKeyTracker < 2) {
-        apiKeyTracker++;
-    }
-
-    // Returns the apiKeyTracker variable to zero after the last position
-    else {
-        apiKeyTracker = 0;
-    }
-    // Reassigns the apiKey variable
-    apiKey = apiKeysArr[apiKeyTracker];
-};
-
 // Function for shortening long strings (for when the title and or description is excessively long)
 var stringSlice = function (str) {
     // Checks the string length
@@ -415,8 +400,6 @@ var searchActor = function (name) {
                             // Displays the actors that returned from the search as button choices
                             createResultBtns("actor");
                         }
-                        // Cycles to the next API key in the array
-                        apiKeyCycler();
                     });
             }
 
@@ -503,8 +486,6 @@ var searchMovie = function (movie) {
                             // Shows the results of the search with buttons for any options
                             createResultBtns("movie");
                         };
-                        // Cycles to the next API key in the array
-                        apiKeyCycler();
                     });
             }
 
@@ -640,8 +621,6 @@ var getFullCast = function (movieID) {
                             okResponseProblemDisplay();
                             resetPoster();
                         }
-                        // Cycles to the next API key in the array
-                        apiKeyCycler();
                     });
             }
 
