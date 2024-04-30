@@ -1,3 +1,5 @@
+import { savedActorsArr } from "./savedActorsArr.js";
+
 // BEGIN QUERY SELECTORS
 var movieInputEl = document.querySelector("#movie-search");
 var searchMovieBtn = document.querySelector("#searchMovie");
@@ -28,17 +30,6 @@ var apiKey = apiKeysArr[apiKeyTracker];
 var currentActorObj = {};
 var currentMovieObj = {};
 var resultsArr = [];
-// Starting array of actors. This array will be built up any time the user uses a new actor not already represented in the array
-var savedActorsArr = [
-    { imgUrl: "https://image.tmdb.org/t/p/w500/cqMiQtOrdBC82oPCHIZcMNUI80C.jpg", name: "Russell Crowe", id: "934", description: "(Actor, Les Misérables (2012))" }, { imgUrl: "https://image.tmdb.org/t/p/w500/8BpM0SSdRJdMMl3vRqrk2LUICxH.jpg", name: "Djimon Hounsou", id: "938", description: "(Actor, Blood Diamond (2006))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/1W8L3kEMMPF9umT3ZGaNIiCYKfZ.jpg", name: "Zachary Levi", id: "69899", description: "(Actor, Shazam! (2019))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/be1bVF7qGX91a6c5WeRPs5pKXln.jpg", name: "Idris Elba", id: "17605", description: "(Actor, Beasts of No Nation (2015))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/xvbnUiB2ZBR3QIt595OzNy657Vw.jpg", name: "Michael Fassbender", id: "17288", description: "(I) (Actor, Shame (2011))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/9AXsaKZPlQKjF32IC6oQavyaXiS.jpg", name: "Jennifer Lawrence", id: "72129", description: "(III) (Actress, The Hunger Games (2012))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/bykmxJHLfbFM3NT05RZXhx8YTzF.jpg", name: "Kevin Costner", id: "1269", description: "(Actor, The Postman (1997))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/eOh4ubpOm2Igdg0QH2ghj0mFtC.jpg", name: "Tom Cruise", id: "500", description: "(Actor, Top Gun (1986))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/ify7UiQkVMQ0uCUX0F0AuzLK1vS.jpg", name: "Amy Adams", id: "9273", description: "(III) (Actress, Arrival (2016))" },
-    { imgUrl: "https://image.tmdb.org/t/p/w500/qyigJ4qyrxZdVwz89uZwQaTvXX8.jpg", name: "Anne Hathaway", id: "1813", description: "(Actress, Les Misérables (2012))" }];
 // Set Kevin Bacon's information to a variable so that a non-classic version of the game can be created where Kevin Bacon is not the destination actor
 var kevinBacon = { imgUrl: "https://image.tmdb.org/t/p/w500/rjX2Oz3tCZMfSwOoIAyEhdtXnTE.jpg", name: "Kevin Bacon", id: "4724", description: "(I) (Actor, Footloose (1984))" };
 var savedMoviesArr = [];
@@ -204,7 +195,7 @@ var checkSavedActorsArr = function (obj) {
     // Checks that savedActorsArr actually has anything in it
     if (savedActorsArr !== null) {
         // Loops through each object in the savedActorsArr array
-        for (i = 0; i < savedActorsArr.length; i++) {
+        for (let i = 0; i < savedActorsArr.length; i++) {
             // Checks if the ID's match
             if (savedActorsArr[i].id === obj.id) {
                 // Returns true, ending the function, if it finds a match
@@ -222,7 +213,7 @@ var checkSavedMoviesArr = function (obj) {
     // Checks that savedMoivesArr actually has anything in it
     if (savedMoviesArr !== null) {
         // Loops through each object in the savedMoviesArr array
-        for (i = 0; i < savedMoviesArr.length; i++) {
+        for (let i = 0; i < savedMoviesArr.length; i++) {
             // Checks if the ID's match
             if (savedMoviesArr[i].id === obj.id) {
                 // Returns true, ending the function, if it finds a match
@@ -248,7 +239,7 @@ var saveHistory = function () {
 var assignSavedActorNames = function () {
     // Resets savedActorNames so that duplicates don't appear in the array every time the function is called
     savedActorNames = [];
-    for (i = 0; i < savedActorsArr.length; i++) {
+    for (let i = 0; i < savedActorsArr.length; i++) {
         savedActorNames.push(savedActorsArr[i].name);
     };
 };
@@ -257,7 +248,7 @@ var assignSavedActorNames = function () {
 var assignSavedMovieNames = function () {
     // Resets savedMovieNames so that duplicates don't appear in the array every time the function is called
     savedMovieNames = [];
-    for (i = 0; i < savedMoviesArr.length; i++) {
+    for (let i = 0; i < savedMoviesArr.length; i++) {
         savedMovieNames.push(savedMoviesArr[i].name);
     };
 };
@@ -323,7 +314,7 @@ var closeModal = function () {
 // Displays the results from either the actor or movie searches that the TMDb API returns
 var createResultBtns = function (specialClass) {
     // Loops through the results creating buttons for each
-    for (i = 0; i < resultsArr.length; i++) {
+    for (let i = 0; i < resultsArr.length; i++) {
         var resultBtnEl = document.createElement("button");
         resultBtnEl.classList.add("button", "is-fullwidth", "is-dark", "my-1", specialClass);
         resultBtnEl.textContent = stringSlice(resultsArr[i].name + " " + resultsArr[i].description);
@@ -408,7 +399,7 @@ var searchActor = function (name) {
 
                         else {
                             // Loops through the results from the actor search and assigns the important information to the properties of an object
-                            for (i = 0; i < data.results.length; i++) {
+                            for (let i = 0; i < data.results.length; i++) {
                                 var actorResultObj = {
                                     imgUrl: data.results[i].image,
                                     name: data.results[i].title,
@@ -444,7 +435,7 @@ var searchActor = function (name) {
 // For use when the user is presented with the actor search results. It will set the object containing the important information for the actor they chose in a global variable.
 var actorChoice = function (id) {
     // Loops through the resultsArr to search for the correct object containing the actor id
-    for (i = 0; i < resultsArr.length; i++) {
+    for (let i = 0; i < resultsArr.length; i++) {
         if (resultsArr[i].id === id) {
             // Saves the object with the actor's information
             chosenActor = resultsArr[i];
@@ -496,7 +487,7 @@ var searchMovie = function (movie) {
 
                         else {
                             // Loops through the results from the movie search and assigns the important information to the properties of an object
-                            for (i = 0; i < data.results.length; i++) {
+                            for (let i = 0; i < data.results.length; i++) {
                                 var movieResultObj = {
                                     description: data.results[i].description,
                                     id: data.results[i].id,
@@ -532,7 +523,7 @@ var searchMovie = function (movie) {
 // For use when the user is presented with the movie search results. It will return the object containing the important information for the movie they chose.
 var movieChoice = function (id) {
     // Loops through the resultsArr to search for the correct object containing the movie id
-    for (i = 0; i < resultsArr.length; i++) {
+    for (let i = 0; i < resultsArr.length; i++) {
         if (resultsArr[i].id === id) {
             // Saves the object with the movie's information
             chosenMovie = resultsArr[i];
@@ -669,7 +660,7 @@ var getFullCast = function (movieID) {
 // Checks if an actor is listed in the full cast
 var checkFullCast = function (id) {
     // Runs through the full cast and returns true (ending the function) if the ID is found
-    for (i = 0; i < fullCast.length; i++) {
+    for (let i = 0; i < fullCast.length; i++) {
         if (fullCast[i].id == id) {
             return true;
         };
@@ -748,7 +739,7 @@ var displayChoiceActor = function () {
 // Function for reusing saved information to decrease API fetches
 var reuseSavedDataActor = function (name) {
     // Checks all of the saved actors' information to see if it has been saved
-    for (i = 0; i < savedActorsArr.length; i++) {
+    for (let i = 0; i < savedActorsArr.length; i++) {
         // Returns it as a result in the resultsArr if it has
         if (savedActorsArr[i].name == name) {
             resultsArr.push(savedActorsArr[i]);
@@ -759,7 +750,7 @@ var reuseSavedDataActor = function (name) {
 // Function for reusing saved information to decrease API fetches
 var reuseSavedDataMovie = function (name) {
     // Checks all of the saved actors' information to see if it has been saved
-    for (i = 0; i < savedMoviesArr.length; i++) {
+    for (let i = 0; i < savedMoviesArr.length; i++) {
         // Returns it as a result in the resultsArr if it has
         if (savedMoviesArr[i].name == name) {
             resultsArr.push(savedMoviesArr[i]);
@@ -981,7 +972,7 @@ var modalBtnHandler = function (event) {
     // Remove Button
     if (event.target.classList.contains("button") && event.target.classList.contains("is-danger")) {
         // Loops through the array of saved actors
-        for (i = 0; i < savedActorsArr.length; i++) {
+        for (let i = 0; i < savedActorsArr.length; i++) {
             // If the ID matches the ID saved in the HTML dataset...
             if (savedActorsArr[i].id == event.target.dataset.id) {
                 // ...That saved object will be removed
