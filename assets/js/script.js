@@ -196,13 +196,12 @@ var checkSavedActorsArr = function (obj) {
 
 // Checks if an object (the chosenMovie object) is already saved in savedMoviesArr
 var checkSavedMoviesArr = function (obj) {
-    const savedMoviesArrFiltered = savedMoviesArr.filter(element => element);
     // Checks that savedMoivesArr actually has anything in it
-    if (savedMoviesArrFiltered !== null) {
-        // Loops through each object in the savedMoviesArrFiltered array
-        for (let i = 0; i < savedMoviesArrFiltered.length; i++) {
+    if (savedMoviesArr !== null) {
+        // Loops through each object in the savedMoviesArr array
+        for (let i = 0; i < savedMoviesArr.length; i++) {
             // Checks if the ID's match
-            if (savedMoviesArrFiltered[i].id === obj.id) {
+            if (savedMoviesArr[i].id === obj.id) {
                 // Returns true, ending the function, if it finds a match
                 return true;
             }
@@ -235,9 +234,8 @@ var assignSavedActorNames = function () {
 var assignSavedMovieNames = function () {
     // Resets savedMovieNames so that duplicates don't appear in the array every time the function is called
     savedMovieNames = [];
-    const savedMoviesArrFiltered = savedMoviesArr.filter(element => element);
-    for (let i = 0; i < savedMoviesArrFiltered.length; i++) {
-        savedMovieNames.push(savedMoviesArrFiltered[i].name);
+    for (let i = 0; i < savedMoviesArr.length; i++) {
+        savedMovieNames.push(savedMoviesArr[i].name);
     };
 };
 
@@ -259,10 +257,10 @@ var autocompleteActorSource = function () {
 var loadHistory = function () {
     // if statements check whether anything is already saved to local storage
     if (JSON.parse(localStorage.getItem("Movies")) !== null) {
-        savedMoviesArr = JSON.parse(localStorage.getItem("Movies"));
+        savedMoviesArr = JSON.parse(localStorage.getItem("Movies")).filter(element => element);
     };
     if (JSON.parse(localStorage.getItem("Actors")) !== null && JSON.parse(localStorage.getItem("Actors")).length > 0) {
-        savedActorsArr = JSON.parse(localStorage.getItem("Actors"));
+        savedActorsArr = JSON.parse(localStorage.getItem("Actors")).filter(element => element);
     };
 };
 // End Utility Functions
@@ -732,12 +730,11 @@ var reuseSavedDataActor = function (name) {
 
 // Function for reusing saved information to decrease API fetches
 var reuseSavedDataMovie = function (name) {
-    const savedMoviesArrFiltered = savedMoviesArr.filter(element => element);
     // Checks all of the saved actors' information to see if it has been saved
-    for (let i = 0; i < savedMoviesArrFiltered.length; i++) {
+    for (let i = 0; i < savedMoviesArr.length; i++) {
         // Returns it as a result in the resultsArr if it has
-        if (savedMoviesArrFiltered[i].name == name) {
-            resultsArr.push(savedMoviesArrFiltered[i]);
+        if (savedMoviesArr[i].name == name) {
+            resultsArr.push(savedMoviesArr[i]);
         };
     };
 };
