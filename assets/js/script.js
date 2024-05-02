@@ -609,7 +609,8 @@ var getFullCast = function (movieID) {
                         console.log(data);
                         if (!data.errorMessage) {
                             // Sets the returned cast data to the fullCast variable
-                            fullCast = data.actors;
+                            console.log(data);
+                            fullCast = data.cast;
                             if (document.getElementById("check")) {
                                 // Removes the loading indicator from the "check" button once the full cast has been retrieved
                                 document.getElementById("check").classList.remove("is-loading");
