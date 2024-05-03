@@ -183,7 +183,7 @@ var checkSavedActorsArr = function (obj) {
         // Loops through each object in the savedActorsArr array
         for (let i = 0; i < savedActorsArr.length; i++) {
             // Checks if the ID's match
-            if (savedActorsArr[i].id === obj.id) {
+            if (savedActorsArr[i].id == obj.id) {
                 // Returns true, ending the function, if it finds a match
                 return true;
             }
@@ -201,7 +201,7 @@ var checkSavedMoviesArr = function (obj) {
         // Loops through each object in the savedMoviesArr array
         for (let i = 0; i < savedMoviesArr.length; i++) {
             // Checks if the ID's match
-            if (savedMoviesArr[i].id === obj.id) {
+            if (savedMoviesArr[i].id == obj.id) {
                 // Returns true, ending the function, if it finds a match
                 return true;
             }
@@ -263,6 +263,13 @@ var loadHistory = function () {
         savedActorsArr = JSON.parse(localStorage.getItem("Actors")).filter(element => element);
     };
 };
+
+// Function for converting array of objects representing movies an actor is known for to text
+var knownForToText = function (arr) {
+    return arr.reduce((a, c) => {
+        return a + c.title + ", ";
+    }, '').replace(/, $/, '');
+}
 // End Utility Functions
 
 
@@ -386,11 +393,13 @@ var searchActor = function (name) {
                         else {
                             // Loops through the results from the actor search and assigns the important information to the properties of an object
                             for (let i = 0; i < data.results.length; i++) {
+                                console.log(knownForToText(data.results[i].known_for))
                                 var actorResultObj = {
-                                    imgUrl: data.results[i].image,
-                                    name: data.results[i].title,
+                                    imgUrl: `https://image.tmdb.org/t/p/original${data.results[i].profile_path}`,
+                                    name: data.results[i].name,
                                     id: data.results[i].id,
-                                    description: data.results[i].description
+                                    // data.results[i].known_for => array of movies => arr[i].title
+                                    description: `Known for: ${knownForToText(data.results[i].known_for)}`
                                 };
                                 // Adds the newly created object into the resultsArr array (this is the same array that receives the movie search results, so this function should only be used after we're done with the actor results)
                                 resultsArr.push(actorResultObj);
@@ -420,7 +429,7 @@ var searchActor = function (name) {
 var actorChoice = function (id) {
     // Loops through the resultsArr to search for the correct object containing the actor id
     for (let i = 0; i < resultsArr.length; i++) {
-        if (resultsArr[i].id === id) {
+        if (resultsArr[i].id == id) {
             // Saves the object with the actor's information
             chosenActor = resultsArr[i];
         };
@@ -506,7 +515,7 @@ var searchMovie = function (movie) {
 var movieChoice = function (id) {
     // Loops through the resultsArr to search for the correct object containing the movie id
     for (let i = 0; i < resultsArr.length; i++) {
-        if (resultsArr[i].id === id) {
+        if (resultsArr[i].id == id) {
             // Saves the object with the movie's information
             chosenMovie = resultsArr[i];
         };
@@ -567,6 +576,7 @@ var getMovieSynopsis = function () {
                 response.json()
                     // Runs an anonymous function to handle the fetched data, displaying it on the poster label
                     .then(function (data) {
+                        console.log(data)
                         posterLabelEl.textContent = data.Plot;
                         posterLabelEl.classList.remove("is-invisible");
                     })
