@@ -482,10 +482,11 @@ var searchMovie = function (movie) {
                             // Loops through the results from the movie search and assigns the important information to the properties of an object
                             for (let i = 0; i < data.results.length; i++) {
                                 var movieResultObj = {
-                                    description: data.results[i].overview,
+                                    overview: data.results[i].overview,
+                                    description: data.results[i].release_date.slice(0, 4),
                                     id: data.results[i].id,
                                     imgUrl: `https://image.tmdb.org/t/p/original/${data.results[i].poster_path}`,
-                                    name: data.results[i].title
+                                    name: data.results[i].title,
                                 };
                                 // Adds the newly created object into the resultsArr array (this is the same array that receives the actor search results, so this function should only be used after we're done with the actor results)
                                 resultsArr.push(movieResultObj);
